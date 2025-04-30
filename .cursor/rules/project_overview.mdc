@@ -1,0 +1,74 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
+# Project Overview
+
+## Objectives
+
+- Systematically probe multiple large language model (LLM) APIs (e.g., OpenAI, Anthropic, Google Gemini, TogetherAI) with standardized prompts.
+- Log and store responses in a structured, reproducible format for subsequent analysis.
+- Publish interactive results through a lightweight Vue 3 + Vite web application, styled with Tailwind CSS and DaisyUI, auto-deployed to GitHub Pages via GitHub Actions.
+- Keep backend (Python) and frontend (web) code cleanly separated to simplify development, testing, and deployment.
+
+## Structure
+```
+project_root/
+├── README.md
+├── LICENSE
+├── .gitignore
+├── .env.sample                 # API keys (NOT committed)
+├── data/                       # Raw + processed model outputs
+│   ├── raw/                   # Original LLM responses
+│   └── processed/             # Analyzed and formatted data
+├── backend/                    # Python component
+│   └── workflow/                   # The workflows
+├── frontend/                   # Vue 3 + Vite app
+└── .github/
+    └── workflows/
+        └── deploy-pages.yml    # build + push gh pages
+```
+
+## Backend Specifications
+
+- Use `uv` to manage the Python environment
+- The Python tasks will be executed locally, not in the cloud or through CI
+- Data storage format: JSON for raw responses, processed data in both JSON and CSV formats
+
+## Frontend Specifications
+
+- Vue 3 + Vite web application
+- Node.js version: 18+ LTS
+- Use Tailwind CSS and DaisyUI for styling
+- The webpage will feature:
+  - Interactive visualization of backend results
+  - Sub-pages for different research paper results
+  - Responsive design for mobile and desktop
+
+## Development Workflow
+
+### Local Development
+1. Backend:
+   - Create Python environment with `uv`
+   - Execute scripts locally for LLM probing
+
+2. Frontend:
+   - Install dependencies with npm
+   - Run development server with hot reload
+   - Build for production
+
+### Deployment
+- Frontend automatically deploys to GitHub Pages via GitHub Actions
+- Backend results are processed locally and committed to the data directory
+- Environment variables are managed via .env files (not committed)
+
+## Data Management
+- Raw LLM responses are stored in JSON format
+- Each response includes:
+  - Timestamp
+  - Model identifier
+  - Prompt used
+  - Complete response
+  - Metadata (temperature, tokens, etc.)
+- Processed results include aggregated statistics and analysis
