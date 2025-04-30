@@ -1,16 +1,10 @@
-# llm_domain_probe
+# Frontend
 
-This template should help get you started developing with Vue 3 in Vite.
+This folder contains the frontend code for the project.
 
-## Recommended IDE Setup
+A GitHub workflow has been set up so that every time changes are made on the main branch, the frontend will be automatically compiled and deployed.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
+## Local project setup
 
 ```sh
 npm install
