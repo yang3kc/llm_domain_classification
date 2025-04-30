@@ -10,9 +10,16 @@ permissions:
   pages: write
   id-token: write
 
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
     steps:
       - uses: actions/checkout@v4
 
@@ -24,12 +31,15 @@ jobs:
           cache-dependency-path: frontend/package-lock.json
 
       - name: Install Dependencies
-        working-directory: frontend
         run: npm ci
 
+      - name: Format Check
+        run: npm run format
+
       - name: Build
-        working-directory: frontend
         run: npm run build
+        env:
+          VITE_BASE_URL: ${{ github.event.repository.name }}
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
