@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <div class="container mx-auto">
     <h1>This is an about page</h1>
     <router-link to="/">Home</router-link>
   </div>
