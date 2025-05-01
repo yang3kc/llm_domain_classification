@@ -5,7 +5,7 @@ const results = ref([])
 
 onMounted(async () => {
   try {
-    const response = await fetch('/data/results.json')
+    const response = await fetch(`${import.meta.env.BASE_URL}data/results.json`)
     const text = await response.text()
     // Split by newlines and parse each line as JSON
     results.value = text.trim().split('\n').map(line => JSON.parse(line))
