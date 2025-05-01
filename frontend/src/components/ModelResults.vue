@@ -64,10 +64,30 @@ const formatPValue = (pValue) => {
       <table class="table w-full">
         <thead>
           <tr class="bg-base-200">
-            <th>Model</th>
-            <th class="text-right">N (%)</th>
-            <th class="text-right">Spearman's ρ</th>
-            <th class="text-right">p-value</th>
+            <th>
+              Model
+              <div class="tooltip tooltip-right" data-tip="Large Language Model variant used for testing">
+                <span class="text-xs ml-1 opacity-50 cursor-help">?</span>
+              </div>
+            </th>
+            <th class="text-right">
+              N (%)
+              <div class="tooltip tooltip-right" data-tip="Number of domains processed (percentage of total domains)">
+                <span class="text-xs ml-1 opacity-50 cursor-help">?</span>
+              </div>
+            </th>
+            <th class="text-right">
+              Spearman's ρ
+              <div class="tooltip tooltip-left" data-tip="Spearman's rank correlation coefficient between model predictions and ground truth">
+                <span class="text-xs ml-1 opacity-50 cursor-help">?</span>
+              </div>
+            </th>
+            <th class="text-right">
+              p-value
+              <div class="tooltip tooltip-left" data-tip="Statistical significance: *** (p<0.001), ** (p<0.01), * (p<0.05), NS (not significant)">
+                <span class="text-xs ml-1 opacity-50 cursor-help">?</span>
+              </div>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -87,10 +107,30 @@ const formatPValue = (pValue) => {
       <table class="table w-full">
         <thead>
           <tr class="bg-base-200">
-            <th>Model</th>
-            <th>Left/Right</th>
-            <th>t-value</th>
-            <th>p-value</th>
+            <th>
+              Model
+              <div class="tooltip tooltip-right" data-tip="Large Language Model variant used for testing">
+                <span class="text-xs ml-1 opacity-50 cursor-help">?</span>
+              </div>
+            </th>
+            <th class="text-right">
+              Left/Right
+              <div class="tooltip tooltip-right" data-tip="Number of domains classified as left-leaning vs right-leaning">
+                <span class="text-xs ml-1 opacity-50 cursor-help">?</span>
+              </div>
+            </th>
+            <th class="text-right">
+              t-value
+              <div class="tooltip tooltip-left" data-tip="T-statistic measuring the bias between left and right classifications">
+                <span class="text-xs ml-1 opacity-50 cursor-help">?</span>
+              </div>
+            </th>
+            <th class="text-right">
+              p-value
+              <div class="tooltip tooltip-left" data-tip="Statistical significance: *** (p<0.001), ** (p<0.01), * (p<0.05), NS (not significant)">
+                <span class="text-xs ml-1 opacity-50 cursor-help">?</span>
+              </div>
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -107,4 +147,19 @@ const formatPValue = (pValue) => {
 </template>
 
 <style scoped>
+/* Custom tooltip styling */
+:deep(.tooltip) {
+  --tooltip-color: #1f2937; /* Dark background */
+  --tooltip-text-color: white; /* White text */
+}
+
+:deep(.tooltip::before) {
+  background-color: var(--tooltip-color) !important;
+  color: var(--tooltip-text-color) !important;
+  padding: 0.5rem 0.75rem !important;
+  font-size: 0.875rem !important;
+  max-width: 20rem !important;
+  border-radius: 0.375rem !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important;
+}
 </style>
