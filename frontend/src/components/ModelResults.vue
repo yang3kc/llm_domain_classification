@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 
+const totalNumberOfDomains = 5653
 const results = ref([])
 const correlationResults = computed(() => {
   return results.value
@@ -38,6 +39,21 @@ onMounted(async () => {
 
 // Format number to 3 decimal places
 const formatNumber = (num) => Number(num).toFixed(3)
+const formatPercentage = (num) => (num / totalNumberOfDomains * 100).toFixed(1)
+
+// Convert p-value to significance stars
+const pValueToStars = (pValue) => {
+  if (pValue < 0.001) return '***'
+  if (pValue < 0.01) return '**'
+  if (pValue < 0.05) return '*'
+  return 'NS' // Not significant
+}
+
+// Format p-value with stars
+const formatPValue = (pValue) => {
+  const stars = pValueToStars(pValue)
+  return stars
+}
 </script>
 
 <template>
@@ -49,17 +65,17 @@ const formatNumber = (num) => Number(num).toFixed(3)
         <thead>
           <tr class="bg-base-200">
             <th>Model</th>
-            <th>N</th>
-            <th>ρ (Rho)</th>
-            <th>p-value</th>
+            <th class="text-right">N (%)</th>
+            <th class="text-right">Spearman's ρ</th>
+            <th class="text-right">p-value</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="result in correlationResults" :key="result.model" class="hover">
             <td class="font-mono text-sm">{{ result.model }}</td>
-            <td class="text-right">{{ result.n }}</td>
+            <td class="text-right">{{ result.n }}({{ formatPercentage(result.n) }}%)</td>
             <td class="text-right">{{ formatNumber(result.rho) }}</td>
-            <td class="text-right">{{ result.rho_p === 0 ? '< 0.001' : formatNumber(result.rho_p) }}</td>
+            <td class="text-right">{{ formatPValue(result.rho_p) }}</td>
           </tr>
         </tbody>
       </table>
@@ -82,7 +98,7 @@ const formatNumber = (num) => Number(num).toFixed(3)
             <td class="font-mono text-sm">{{ result.model }}</td>
             <td class="text-right">{{ result.left_n }}/{{ result.right_n }}</td>
             <td class="text-right">{{ formatNumber(result.t) }}</td>
-            <td class="text-right">{{ result.t_p === 0 ? '< 0.001' : formatNumber(result.t_p) }}</td>
+            <td class="text-right">{{ formatPValue(result.t_p) }}</td>
           </tr>
         </tbody>
       </table>
