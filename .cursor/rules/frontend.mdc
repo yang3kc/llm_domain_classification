@@ -1,0 +1,136 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# Frontend Development Guide
+
+## Technology Stack
+- Vue 3 with Composition API
+- Vite as build tool
+- Tailwind CSS for styling
+- DaisyUI for UI components
+- File-based routing
+
+## Project Structure
+```
+frontend/
+├── src/
+│   ├── assets/            # Static assets and global CSS
+│   │   └── main.css      # Global styles and Tailwind imports
+│   ├── components/       # Reusable Vue components
+│   ├── views/           # Page components
+│   ├── App.vue         # Root component
+│   └── main.js         # Application entry point
+├── public/             # Static files
+│   └── data/          # Data files for visualization
+├── index.html         # HTML entry point
+└── vite.config.js     # Vite configuration
+```
+
+## Coding Conventions
+
+### Vue Components
+- Use Composition API with `<script setup>`
+- Component template:
+```vue
+<script setup>
+import { ref, onMounted } from 'vue'
+// Component logic here
+</script>
+
+<template>
+  <!-- Template here -->
+</template>
+
+<style scoped>
+/* Scoped styles if needed */
+</style>
+```
+
+### Data Fetching
+- Place data files in `public/data/`
+- Use async/await for data fetching
+- Example:
+```javascript
+const data = ref([])
+onMounted(async () => {
+  const response = await fetch('/data/results.json')
+  data.value = await response.json()
+})
+```
+
+### Styling
+- Use Tailwind CSS utility classes
+- Common patterns:
+  - Layout: `container mx-auto`
+  - Spacing: `p-4 m-4`
+  - Flexbox: `flex items-center justify-between`
+  - Grid: `grid grid-cols-2 gap-4`
+- DaisyUI components:
+  - Tables: `table table-zebra`
+  - Buttons: `btn btn-primary`
+  - Cards: `card card-bordered`
+
+### File Naming
+- Components: PascalCase (e.g., `ModelResults.vue`)
+- Views: PascalCase with 'View' suffix (e.g., `HomeView.vue`)
+- Utilities: camelCase (e.g., `formatNumber.js`)
+
+### Component Organization
+- Views (`src/views/`):
+  - Full pages
+  - Route components
+  - Layout containers
+- Components (`src/components/`):
+  - Reusable UI elements
+  - Data visualization components
+  - Feature-specific components
+
+### State Management
+- Use `ref()` and `reactive()` for local state
+- Props for component communication
+- Emit events for child-to-parent communication
+
+### Data Visualization
+- Place visualization components in `components/`
+- Use async data loading in `onMounted`
+- Format numbers using utility functions
+- Example number formatting:
+```javascript
+const formatNumber = (num) => Number(num).toFixed(3)
+```
+
+### Performance Considerations
+- Use `v-show` for frequent toggles
+- Use `v-if` for conditional rendering
+- Implement lazy loading for routes
+- Use `computed` properties for derived data
+
+### Error Handling
+- Wrap async operations in try/catch
+- Provide user feedback for errors
+- Example:
+```javascript
+try {
+  const response = await fetch('/data/results.json')
+  // Handle response
+} catch (error) {
+  console.error('Error:', error)
+  // Show user feedback
+}
+```
+
+## Key Files
+
+### [src/App.vue](mdc:frontend/src/App.vue)
+Root component with global layout
+
+### [src/views/HomeView.vue](mdc:frontend/src/views/HomeView.vue)
+Main page displaying LLM classification results
+
+### [src/components/ModelResults.vue](mdc:frontend/src/components/ModelResults.vue)
+Table component for displaying model results
+
+### [src/assets/main.css](mdc:frontend/src/assets/main.css)
+Global styles and Tailwind configuration
