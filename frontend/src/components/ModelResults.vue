@@ -1,7 +1,17 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 
 const results = ref([])
+const correlationResults = computed(() => {
+  return results.value
+    .map(result => ({
+      model: result.model,
+      n: result.n,
+      rho: result.rho,
+      rho_p: result.rho_p
+    }))
+    .sort((a, b) => b.rho - a.rho) // Sort by rho in descending order
+})
 
 onMounted(async () => {
   try {
@@ -19,52 +29,60 @@ const formatNumber = (num) => Number(num).toFixed(3)
 </script>
 
 <template>
-  <div class="overflow-x-auto">
-    <table class="table w-full">
-      <thead>
-        <tr class="bg-base-200">
-          <th>Model</th>
-          <th>N</th>
-          <th>ρ (Rho)</th>
-          <th>p-value</th>
-          <th>Significance</th>
-          <th>Left/Right</th>
-          <th>t-value</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="result in results" :key="result.model" class="hover">
-          <td class="font-mono text-sm">{{ result.model }}</td>
-          <td class="text-right">{{ result.n }}</td>
-          <td class="text-right">{{ formatNumber(result.rho) }}</td>
-          <td class="text-right">{{ result.rho_p === 0 ? '< 0.001' : formatNumber(result.rho_p) }}</td>
-          <td class="text-center">{{ result.rho_stars }}</td>
-          <td class="text-right">{{ result.left_n }}/{{ result.right_n }}</td>
-          <td class="text-right">{{ formatNumber(result.t) }}</td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="space-y-8">
+    <!-- Correlation Results Table -->
+    <div class="overflow-x-auto">
+      <h2 class="text-xl font-bold mb-4">Correlation Results (Sorted by ρ)</h2>
+      <table class="table w-full">
+        <thead>
+          <tr class="bg-base-200">
+            <th>Model</th>
+            <th>N</th>
+            <th>ρ (Rho)</th>
+            <th>p-value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="result in correlationResults" :key="result.model" class="hover">
+            <td class="font-mono text-sm">{{ result.model }}</td>
+            <td class="text-right">{{ result.n }}</td>
+            <td class="text-right">{{ formatNumber(result.rho) }}</td>
+            <td class="text-right">{{ result.rho_p === 0 ? '< 0.001' : formatNumber(result.rho_p) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Full Results Table -->
+    <div class="overflow-x-auto">
+      <h2 class="text-xl font-bold mb-4">Full Results</h2>
+      <table class="table w-full">
+        <thead>
+          <tr class="bg-base-200">
+            <th>Model</th>
+            <th>N</th>
+            <th>ρ (Rho)</th>
+            <th>p-value</th>
+            <th>Significance</th>
+            <th>Left/Right</th>
+            <th>t-value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="result in results" :key="result.model" class="hover">
+            <td class="font-mono text-sm">{{ result.model }}</td>
+            <td class="text-right">{{ result.n }}</td>
+            <td class="text-right">{{ formatNumber(result.rho) }}</td>
+            <td class="text-right">{{ result.rho_p === 0 ? '< 0.001' : formatNumber(result.rho_p) }}</td>
+            <td class="text-center">{{ result.rho_stars }}</td>
+            <td class="text-right">{{ result.left_n }}/{{ result.right_n }}</td>
+            <td class="text-right">{{ formatNumber(result.t) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
 <style scoped>
-.table {
-  border-collapse: collapse;
-  width: 100%;
-}
-
-.table th,
-.table td {
-  padding: 0.75rem;
-  border-bottom: 1px solid #e2e8f0;
-}
-
-.table th {
-  font-weight: 600;
-  text-align: left;
-}
-
-.hover:hover {
-  background-color: #f8fafc;
-}
 </style>
