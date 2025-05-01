@@ -1,9 +1,10 @@
 <script setup>
+import ModelResults from '@/components/ModelResults.vue'
 </script>
 
 <template>
-  <div class="container mx-auto">
-    <h1>Home</h1>
-    <router-link to="/about">About</router-link>
+  <div class="container mx-auto py-8">
+    <h1 class="text-3xl font-bold mb-6">LLM Domain Classification Results</h1>
+    <ModelResults />
   </div>
 </template>
