@@ -18,4 +18,8 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
   },
+  server: {
+    open: true, // Automatically open browser on server start
+    port: 5173, // Default Vite port
+  },
 })
