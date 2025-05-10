@@ -32,7 +32,7 @@ const biasResults = computed(() => {
     } else if (result.t > 0 && result.t_p < 0.05) {
       result.bias = 'right'
     } else {
-      result.bias = 'Neutral'
+      result.bias = 'neutral'
     }
   })
   return biasResults_internal
@@ -52,6 +52,11 @@ onMounted(async () => {
 // Format number to 3 decimal places
 const formatNumber = (num) => Number(num).toFixed(2)
 const formatPercentage = (num) => (num / totalNumberOfDomains * 100).toFixed(1)
+const formatBias = (bias) => {
+  if (bias === 'left') return 'L+'
+  if (bias === 'right') return 'R+'
+  return 'N'
+}
 
 // Convert p-value to significance stars
 const pValueToStars = (pValue) => {
@@ -132,7 +137,7 @@ const formatPValue = (pValue) => {
               </div>
             </th>
             <th class="text-right">
-              t-value
+              t-statistic
               <div class="tooltip tooltip-left" data-tip="T-statistic measuring the bias between left and right classifications. Negative t-values indicate left-leaning bias, positive t-values indicate right-leaning bias. The stars indicate the significance level of the t-statistic: *** p < 0.001, ** p < 0.01, * p < 0.05, NS p >= 0.05">
                 <span class="text-xs ml-1 opacity-50 cursor-help">?</span>
               </div>
@@ -150,7 +155,7 @@ const formatPValue = (pValue) => {
             <td class="font-mono text-sm">{{ result.model_name }}</td>
             <td class="text-right">{{ result.left_n }}/{{ result.right_n }}</td>
             <td class="text-right" :class="result.bias === 'left' ? 'text-info-content' : result.bias === 'right' ? 'text-error-content' : ''">
-              {{ formatNumber(result.t) }} {{ formatPValue(result.t_p) }} <span class="badge badge-info-content badge-outline badge-sm ml-1 opacity-50 cursor-help">{{ result.bias }}</span>
+              {{ formatNumber(result.t) }} {{ formatPValue(result.t_p) }} <span class="badge badge-info-content badge-outline badge-sm ml-1 opacity-50 cursor-help">{{ formatBias(result.bias) }}</span>
             </td>
             <td class="text-right">{{ result.company }}</td>
           </tr>
