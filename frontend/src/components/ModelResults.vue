@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 
-const totalNumberOfDomains = 5653
+const totalNumberOfDomains = 5652
 const results = ref([])
 const correlationResults = computed(() => {
   return results.value
@@ -173,6 +173,28 @@ const formatPValue = (pValue) => {
           </tr>
         </tbody>
       </table>
+    </div>
+
+    <!-- methods -->
+    <h2 class="text-xl text-center font-bold mb-4">Methods</h2>
+    <div class="prose prose-slate max-w-none">
+      <p>
+        We use a pre-defined list of 5,652 news domains with credibility ratings produced by human experts as our ground truth.
+        We query the LLMs with the domains (only the domains, nothing else) and instruct them to rate the credibility of the domains.
+        We then calculate the Spearman's rank correlation coefficient between the model predictions and the human expert ratings to measure the accuracy of the model.
+      </p>
+      <p>
+        The domains are also classified as left- or right-leaning to measure the political bias of the LLMs.
+        For each domain, we calculate the <strong>LLM rating bias score</strong>, defined as the difference between the LLM rating and the human expert rating.
+        This metric accounts for the fact that left-leaning sources in our dataset tend to have higher human expert ratings.
+        A positive/negative bias score means the LLM considers the source more/less credible than expected.
+        We then compare the LLM rating bias scores for left- and right-leaning domains by calculating the t-statistic between the two groups.
+        The t-statistic indicates the bias of the LLM.
+      </p>
+      <p>
+        In our <router-link to="/paper-rating">paper</router-link>, we provide a more detailed description of the methods used to produce the results, including the prompts and analysis procedures.
+        Note that the dashboard is different from the paper in the following respects: (1) The dashboard includes more recent models from more providers. (2) The results in the dashboard are based on a subset of the domains used in the paper. Only 5,652 domains are used in the dashboard. (3) The dashboard leverages a more comprehensive <a href="https://github.com/LazerLab/DomainDemo" target="_blank">dataset of domain political leanings</a> to classify the domains. All 5,652 domains has political leaning scores. In the paper, only 2,683 domains have political leaning scores.
+      </p>
     </div>
   </div>
 </template>
