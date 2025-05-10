@@ -60,7 +60,7 @@ const formatPValue = (pValue) => {
   <div class="space-y-8">
     <!-- Correlation Results Table -->
     <h2 class="text-xl font-bold mb-4">Correlation Results (Sorted by ρ)</h2>
-    <div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
+    <div class="rounded-box border border-base-content/5 bg-base-100">
       <table class="table w-full">
         <thead>
           <tr class="bg-base-200">
@@ -82,20 +82,13 @@ const formatPValue = (pValue) => {
                 <span class="text-xs ml-1 opacity-50 cursor-help">?</span>
               </div>
             </th>
-            <th class="text-right">
-              p-value
-              <div class="tooltip tooltip-left" data-tip="Statistical significance: *** (p<0.001), ** (p<0.01), * (p<0.05), NS (not significant)">
-                <span class="text-xs ml-1 opacity-50 cursor-help">?</span>
-              </div>
-            </th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="result in correlationResults" :key="result.model" class="hover">
             <td class="font-mono text-sm">{{ result.model }}</td>
             <td class="text-right">{{ result.n }}({{ formatPercentage(result.n) }}%)</td>
-            <td class="text-right">{{ formatNumber(result.rho) }}</td>
-            <td class="text-right">{{ formatPValue(result.rho_p) }}</td>
+            <td class="text-right">{{ formatNumber(result.rho) }} {{ formatPValue(result.rho_p) }}</td>
           </tr>
         </tbody>
       </table>
@@ -103,7 +96,7 @@ const formatPValue = (pValue) => {
 
     <!-- Bias Results Table -->
     <h2 class="text-xl font-bold mb-4">Bias Results (Sorted by t-value)</h2>
-    <div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
+    <div class="rounded-box border border-base-content/5 bg-base-100">
       <table class="table w-full">
         <thead>
           <tr class="bg-base-200">
@@ -125,20 +118,13 @@ const formatPValue = (pValue) => {
                 <span class="text-xs ml-1 opacity-50 cursor-help">?</span>
               </div>
             </th>
-            <th class="text-right">
-              p-value
-              <div class="tooltip tooltip-left" data-tip="Statistical significance: *** (p<0.001), ** (p<0.01), * (p<0.05), NS (not significant)">
-                <span class="text-xs ml-1 opacity-50 cursor-help">?</span>
-              </div>
-            </th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="result in biasResults" :key="result.model" class="hover">
             <td class="font-mono text-sm">{{ result.model }}</td>
             <td class="text-right">{{ result.left_n }}/{{ result.right_n }}</td>
-            <td class="text-right">{{ formatNumber(result.t) }}</td>
-            <td class="text-right">{{ formatPValue(result.t_p) }}</td>
+            <td class="text-right">{{ formatNumber(result.t) }} {{ formatPValue(result.t_p) }}</td>
           </tr>
         </tbody>
       </table>
