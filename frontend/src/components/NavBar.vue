@@ -3,8 +3,8 @@
     <div class="container mx-auto">
       <div class="flex-none">
         <ul class="menu menu-horizontal px-1">
-          <li><a router-link="/" class="btn btn-neutral text-white text-xl">Results</a></li>
-          <li><a router-link="/about" class="btn btn-neutral text-white text-xl">About</a></li>
+          <li><router-link to="/" class="btn btn-neutral text-white text-xl">Results</router-link></li>
+          <li><router-link to="/about" class="btn btn-neutral text-white text-xl">About</router-link></li>
         </ul>
       </div>
     </div>
