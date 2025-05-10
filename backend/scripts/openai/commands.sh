@@ -27,3 +27,13 @@ uv run parse_openai.py openai o3-mini-2025-01-31 ../../../data/intermediate/raw_
 uv run query_openai.py ../../../data/source/dashboard_query_list.csv openai o4-mini-2025-04-16 ../../../data/intermediate/raw_responses/openai/o4-mini-2025-04-16
 
 uv run parse_openai.py openai o4-mini-2025-04-16 ../../../data/intermediate/raw_responses/openai/o4-mini-2025-04-16 ../../../data/intermediate/parsed_responses/openai/o4-mini-2025-04-16.parquet
+
+# o1
+uv run query_openai.py ../../../data/source/dashboard_query_list.csv openai o1-2024-12-17 ../../../data/intermediate/raw_responses/openai/o1-2024-12-17
+
+uv run parse_openai.py openai o1-2024-12-17 ../../../data/intermediate/raw_responses/openai/o1-2024-12-17 ../../../data/intermediate/parsed_responses/openai/o1-2024-12-17.parquet
+
+# o3
+uv run query_openai.py ../../../data/source/dashboard_query_list.csv openai o3-2025-04-16 ../../../data/intermediate/raw_responses/openai/o3-2025-04-16
+
+uv run parse_openai.py openai o3-2025-04-16 ../../../data/intermediate/raw_responses/openai/o3-2025-04-16 ../../../data/intermediate/parsed_responses/openai/o3-2025-04-16.parquet
