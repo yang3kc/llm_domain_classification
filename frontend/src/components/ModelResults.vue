@@ -131,7 +131,7 @@ const formatPValue = (pValue) => {
               </div>
             </th>
             <th class="text-right">
-              Left/Right
+              Left | Right
               <div class="tooltip tooltip-right" data-tip="Number of domains classified as left-leaning vs right-leaning and processed by the model">
                 <span class="text-xs ml-1 opacity-50 cursor-help">?</span>
               </div>
@@ -153,7 +153,13 @@ const formatPValue = (pValue) => {
         <tbody>
           <tr v-for="result in biasResults" :key="result.model_name" class="hover">
             <td class="font-mono text-sm">{{ result.model_name }}</td>
-            <td class="text-right">{{ result.left_n }}/{{ result.right_n }}</td>
+            <td class="text-right">
+                <div class="flex justify-end items-center gap-2">
+                    <span class="text-info-content">{{ result.left_n }}</span>
+                    <span class="opacity-50">|</span>
+                    <span class="text-error-content">{{ result.right_n }}</span>
+                </div>
+            </td>
             <td class="text-right" :class="result.bias === 'left' ? 'text-info-content' : result.bias === 'right' ? 'text-error-content' : ''">
               {{ formatNumber(result.t) }} {{ formatPValue(result.t_p) }} <span class="badge badge-info-content badge-outline badge-sm ml-1 opacity-50 cursor-help">{{ formatBias(result.bias) }}</span>
             </td>
