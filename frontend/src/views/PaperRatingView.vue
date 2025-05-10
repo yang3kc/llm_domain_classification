@@ -81,7 +81,7 @@ const copyToClipboard = async () => {
           <font-awesome-icon :icon="['fas', 'copy']" class="mr-2" />
           {{ copySuccess ? 'Copied!' : 'Copy' }}
         </button>
-        <pre><code>{{ bibtex }}</code></pre>
+        <pre><code class="text-neutral">{{ bibtex }}</code></pre>
       </div>
     </div>
     <Footer />
