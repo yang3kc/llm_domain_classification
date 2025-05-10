@@ -6,10 +6,11 @@ const results = ref([])
 const correlationResults = computed(() => {
   return results.value
     .map(result => ({
-      model: result.model,
+      model_name: result.model_name,
       n: result.n,
       rho: result.rho,
-      rho_p: result.rho_p
+      rho_p: result.rho_p,
+      company: result.company
     }))
     .sort((a, b) => b.rho - a.rho) // Sort by rho in descending order
 })
@@ -17,11 +18,12 @@ const correlationResults = computed(() => {
 const biasResults = computed(() => {
   return results.value
     .map(result => ({
-      model: result.model,
+      model_name: result.model_name,
       left_n: result.left_n,
       right_n: result.right_n,
       t: result.t,
       t_p: result.t_p,
+      company: result.company
     }))
     .sort((a, b) => a.t - b.t) // Sort by t in ascending order
 })
@@ -82,13 +84,20 @@ const formatPValue = (pValue) => {
                 <span class="text-xs ml-1 opacity-50 cursor-help">?</span>
               </div>
             </th>
+            <th class="text-right">
+              Company
+              <div class="tooltip tooltip-right" data-tip="Company that developed the model">
+                <span class="text-xs ml-1 opacity-50 cursor-help">?</span>
+              </div>
+            </th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="result in correlationResults" :key="result.model" class="hover">
-            <td class="font-mono text-sm">{{ result.model }}</td>
+          <tr v-for="result in correlationResults" :key="result.model_name" class="hover">
+            <td class="font-mono text-sm">{{ result.model_name }}</td>
             <td class="text-right">{{ result.n }}({{ formatPercentage(result.n) }}%)</td>
             <td class="text-right">{{ formatNumber(result.rho) }} {{ formatPValue(result.rho_p) }}</td>
+            <td class="text-right">{{ result.company }}</td>
           </tr>
         </tbody>
       </table>
@@ -118,13 +127,20 @@ const formatPValue = (pValue) => {
                 <span class="text-xs ml-1 opacity-50 cursor-help">?</span>
               </div>
             </th>
+            <th class="text-right">
+              Company
+              <div class="tooltip tooltip-right" data-tip="Company that developed the model">
+                <span class="text-xs ml-1 opacity-50 cursor-help">?</span>
+              </div>
+            </th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="result in biasResults" :key="result.model" class="hover">
-            <td class="font-mono text-sm">{{ result.model }}</td>
+          <tr v-for="result in biasResults" :key="result.model_name" class="hover">
+            <td class="font-mono text-sm">{{ result.model_name }}</td>
             <td class="text-right">{{ result.left_n }}/{{ result.right_n }}</td>
             <td class="text-right">{{ formatNumber(result.t) }} {{ formatPValue(result.t_p) }}</td>
+            <td class="text-right">{{ result.company }}</td>
           </tr>
         </tbody>
       </table>
