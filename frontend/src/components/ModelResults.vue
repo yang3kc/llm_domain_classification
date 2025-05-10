@@ -59,8 +59,8 @@ const formatPValue = (pValue) => {
 <template>
   <div class="space-y-8">
     <!-- Correlation Results Table -->
-    <div class="overflow-x-auto">
-      <h2 class="text-xl font-bold mb-4">Correlation Results (Sorted by ρ)</h2>
+    <h2 class="text-xl font-bold mb-4">Correlation Results (Sorted by ρ)</h2>
+    <div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
       <table class="table w-full">
         <thead>
           <tr class="bg-base-200">
@@ -102,8 +102,8 @@ const formatPValue = (pValue) => {
     </div>
 
     <!-- Bias Results Table -->
-    <div class="overflow-x-auto">
-      <h2 class="text-xl font-bold mb-4">Bias Results (Sorted by t-value)</h2>
+    <h2 class="text-xl font-bold mb-4">Bias Results (Sorted by t-value)</h2>
+    <div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
       <table class="table w-full">
         <thead>
           <tr class="bg-base-200">
