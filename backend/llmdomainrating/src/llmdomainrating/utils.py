@@ -29,6 +29,8 @@ def get_domain_to_query(url_list_path, output_root):
     """
     domain_df = pd.read_csv(url_list_path, usecols=["domain"])
     processed_domains = set()
+    if not os.path.exists(output_root):
+        os.makedirs(output_root, exist_ok=True)
     for file_name in os.listdir(output_root):
         if file_name.endswith(".txt"):
             processed_domains.add(file_name[:-4])
