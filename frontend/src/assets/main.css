@@ -1,6 +1,7 @@
 @import 'tailwindcss';
+@plugin "@tailwindcss/typography";
 @plugin 'daisyui' {
-  themes: false;
+  themes: pastel --default;
 }
 
 /* Custom container style */

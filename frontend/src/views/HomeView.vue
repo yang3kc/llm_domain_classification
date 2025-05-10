@@ -1,10 +1,15 @@
 <script setup>
 import ModelResults from '@/components/ModelResults.vue'
+import Footer from '@/components/Footer.vue'
+import NavBar from '@/components/NavBar.vue'
 </script>
 
 <template>
-  <div class="container mx-auto py-8">
-    <h1 class="text-3xl font-bold mb-6">LLM Domain Classification Results</h1>
-    <ModelResults />
+  <div>
+    <NavBar />
+    <div class="container">
+      <ModelResults />
+    </div>
+    <Footer />
   </div>
 </template>
