@@ -1,6 +1,14 @@
+<script setup>
+import NavBar from '@/components/NavBar.vue'
+import Footer from '@/components/Footer.vue'
+</script>
+
 <template>
-  <div class="container mx-auto">
-    <h1>This is an about page</h1>
-    <router-link to="/">Home</router-link>
+  <div>
+    <NavBar />
+    <div class="container mx-auto">
+      <h1>This is an about page</h1>
+    </div>
+    <Footer />
   </div>
 </template>
