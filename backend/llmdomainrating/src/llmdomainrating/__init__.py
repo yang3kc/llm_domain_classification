@@ -1,2 +1,1 @@
-def hello() -> str:
-    return "Hello from llmdomainrating!"
+from .utils import *
