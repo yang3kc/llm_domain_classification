@@ -1,3 +1,5 @@
+from pydantic import BaseModel, Field
+
 ################################################
 # System prompts
 SYS_BASE = "You are an assistant to determine the credibility of websites."
@@ -16,9 +18,43 @@ USER_FORMAT = """
     --------------
     ```json
     {{
-        'url': 'example.com',
+        'domain': 'example.com',
         'rating': 0.5,
         'explanation': 'The example website is known to post credible content.'
     }}
      ```
     """
+
+DOMAIN_RATING_JSON_SCHEMA = {
+    "properties": {
+        "rating": {
+            "description": "Domain credibility rating, ranging from -1 to 1",
+            "title": "Rating",
+            "type": "number",
+        },
+        "domain": {
+            "description": "The domain name",
+            "title": "Domain",
+            "type": "string",
+        },
+        "explanation": {
+            "description": "Explanation of the rating.",
+            "title": "Explanation",
+            "type": "string",
+        },
+    },
+    "additionalProperties": False,
+    "required": ["rating", "domain", "explanation"],
+    "title": "DomainRating",
+    "type": "object",
+}
+
+
+class DomainRating(BaseModel):
+    rating: float = Field(
+        description="Domain credibility rating, ranging from -1 to 1",
+        ge=-1,
+        le=1,
+    )
+    domain: str = Field(description="The domain name.")
+    explanation: str = Field(description="Explanation of the rating.")
