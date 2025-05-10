@@ -8,6 +8,7 @@ dependencies = [
     "llmdomainrating",
     "openai>=1.78.0",
     "pandas>=2.2.3",
+    "python-dotenv>=1.1.0",
 ]
 
 [tool.uv.sources]
