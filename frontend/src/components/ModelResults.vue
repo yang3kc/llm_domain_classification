@@ -16,7 +16,7 @@ const correlationResults = computed(() => {
 })
 
 const biasResults = computed(() => {
-  return results.value
+  let biasResults_internal = results.value
     .map(result => ({
       model_name: result.model_name,
       left_n: result.left_n,
@@ -26,6 +26,16 @@ const biasResults = computed(() => {
       company: result.company
     }))
     .sort((a, b) => a.t - b.t) // Sort by t in ascending order
+  biasResults_internal.forEach(result => {
+    if (result.t < 0 && result.t_p < 0.05) {
+      result.bias = 'left'
+    } else if (result.t > 0 && result.t_p < 0.05) {
+      result.bias = 'right'
+    } else {
+      result.bias = 'Neutral'
+    }
+  })
+  return biasResults_internal
 })
 
 onMounted(async () => {
@@ -139,7 +149,9 @@ const formatPValue = (pValue) => {
           <tr v-for="result in biasResults" :key="result.model_name" class="hover">
             <td class="font-mono text-sm">{{ result.model_name }}</td>
             <td class="text-right">{{ result.left_n }}/{{ result.right_n }}</td>
-            <td class="text-right">{{ formatNumber(result.t) }} {{ formatPValue(result.t_p) }}</td>
+            <td class="text-right" :class="result.bias === 'left' ? 'text-info-content' : result.bias === 'right' ? 'text-error-content' : ''">
+              {{ formatNumber(result.t) }} {{ formatPValue(result.t_p) }} <span class="badge badge-info-content badge-outline badge-sm ml-1 opacity-50 cursor-help">{{ result.bias }}</span>
+            </td>
             <td class="text-right">{{ result.company }}</td>
           </tr>
         </tbody>
