@@ -8,7 +8,7 @@ import Footer from '@/components/Footer.vue'
     <NavBar />
     <div class="container mx-auto">
       <div class="prose-h1 prose-2xl prose-slate text-center font-bold mt-6">The LLM Domain Classification project</div>
-      <div class="prose prose-xl text-center prose-slate max-w-none my-4">Contact: Kai-Cheng Yang</div>
+      <div class="prose prose-xl text-center prose-slate max-w-none my-4">Contact: <a href="https://www.kaichengyang.me" class="link link-neutral">Kai-Cheng Yang</a> <a href="mailto:yang3kc@gmail.com" class="link link-neutral"><font-awesome-icon :icon="['fas', 'envelope']" /></a></div>
       <article class="prose prose-slate max-w-none">
         <p>
           This project aims to evaluate <strong>LLMs' ability to recognize and classify news sources into different categories</strong>.
