@@ -18,10 +18,11 @@ project_root/
 ├── .gitignore
 ├── .env.sample                 # API keys (NOT committed)
 ├── data/                       # Raw + processed model outputs
-│   ├── raw/                   # Original LLM responses
-│   └── processed/             # Analyzed and formatted data
+│   ├── source/                   # Source files
+│   ├── intermediate/             # Intermediate files
+│   └── processed/                # Analyzed and formatted data
 ├── backend/                    # Python component
-│   └── workflow/              # The workflows
+│   └── workflow/                 # The workflows
 ├── frontend/                   # Vue 3 + Vite app
 └── .github/
     └── workflows/
