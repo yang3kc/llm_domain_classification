@@ -40,7 +40,7 @@ onMounted(async () => {
 })
 
 // Format number to 3 decimal places
-const formatNumber = (num) => Number(num).toFixed(3)
+const formatNumber = (num) => Number(num).toFixed(2)
 const formatPercentage = (num) => (num / totalNumberOfDomains * 100).toFixed(1)
 
 // Convert p-value to significance stars
