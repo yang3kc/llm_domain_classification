@@ -31,7 +31,10 @@ class OpenAIClient(BaseClient):
         self.client = OpenAI(api_key=self.api_key)
 
     def query_model(self, domain: str, model: str) -> str:
-        resp = self.response_api(domain, model)
+        if model.startswith("o"):
+            resp = self.response_api_reasoning(domain, model)
+        else:
+            resp = self.response_api(domain, model)
         return resp
 
     def response_api(self, domain: str, model: str) -> str:
@@ -48,6 +51,22 @@ class OpenAIClient(BaseClient):
                         "strict": True,
                         "schema": DOMAIN_RATING_JSON_SCHEMA,
                     }
+                },
+            )
+            return resp.model_dump_json()
+        except Exception as e:
+            print(f"Error: {e}")
+            return None
+
+    def response_api_reasoning(self, domain: str, model: str) -> str:
+        try:
+            resp = self.client.responses.parse(
+                model=model,
+                instructions=SYS_BASE,
+                input=USER_INSTRUCTION.format(domain=domain),
+                reasoning={
+                    "effort": "medium",
+                    "summary": "auto",
                 },
             )
             return resp.model_dump_json()
