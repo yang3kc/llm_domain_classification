@@ -8,7 +8,6 @@ import NavBar from '@/components/NavBar.vue'
   <div>
     <NavBar />
     <div class="container">
-      <h1 class="text-3xl text-center font-bold my-6">LLM Domain Classification Results</h1>
       <ModelResults />
     </div>
     <Footer />

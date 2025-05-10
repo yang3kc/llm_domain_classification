@@ -76,7 +76,8 @@ const formatPValue = (pValue) => {
 <template>
   <div class="space-y-8">
     <!-- Correlation Results Table -->
-    <h2 class="text-xl font-bold mb-4">Correlation Results (Sorted by Spearman's ρ)</h2>
+    <h1 class="text-3xl text-center font-bold my-6">Accuracy and political bias of news source credibility ratings by large language models</h1>
+    <h2 class="text-xl text-center font-bold mb-4">Accuracy (measured by correlation with human expert ratings)</h2>
     <div class="rounded-box border border-base-content/5 bg-base-100">
       <table class="table table-zebra w-full">
         <thead>
@@ -122,7 +123,7 @@ const formatPValue = (pValue) => {
     </div>
 
     <!-- Bias Results Table -->
-    <h2 class="text-xl font-bold mb-4">Bias Results (Sorted by t-statistic)</h2>
+    <h2 class="text-xl text-center font-bold mb-4">Bias measurement</h2>
     <div class="rounded-box border border-base-content/5 bg-base-100">
       <table class="table table-zebra w-full">
         <thead>
