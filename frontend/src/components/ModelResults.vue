@@ -111,7 +111,10 @@ const formatPValue = (pValue) => {
           <tr v-for="result in correlationResults" :key="result.model_name" class="hover">
             <td class="font-mono text-sm">{{ result.model_name }}</td>
             <td class="text-right">{{ result.n }}({{ formatPercentage(result.n) }}%)</td>
-            <td class="text-right">{{ formatNumber(result.rho) }} {{ formatPValue(result.rho_p) }}</td>
+            <td class="text-right">
+              {{ formatNumber(result.rho) }}
+              <span class="badge badge-info-content badge-outline badge-sm ml-1 opacity-40 cursor-help">{{ formatPValue(result.rho_p) }} </span>
+            </td>
             <td class="text-right">{{ result.company }}</td>
           </tr>
         </tbody>
@@ -161,7 +164,9 @@ const formatPValue = (pValue) => {
                 </div>
             </td>
             <td class="text-right" :class="result.bias === 'left' ? 'text-info-content' : result.bias === 'right' ? 'text-error-content' : ''">
-              {{ formatNumber(result.t) }} {{ formatPValue(result.t_p) }} <span class="badge badge-info-content badge-outline badge-sm ml-1 opacity-50 cursor-help">{{ formatBias(result.bias) }}</span>
+              {{ formatNumber(result.t) }}
+              <span class="badge badge-info-content badge-outline badge-sm ml-1 opacity-40 cursor-help">{{ formatPValue(result.t_p) }} </span>
+              <span class="badge badge-info-content badge-outline badge-sm ml-1 opacity-40 cursor-help">{{ formatBias(result.bias) }}</span>
             </td>
             <td class="text-right">{{ result.company }}</td>
           </tr>
