@@ -5,10 +5,12 @@ import NavBar from '@/components/NavBar.vue'
 </script>
 
 <template>
-  <div class="container mx-auto py-8">
+  <div>
     <NavBar />
-    <h1 class="text-3xl font-bold mb-6">LLM Domain Classification Results</h1>
-    <ModelResults />
-    <Footer />
+    <div class="container">
+      <h1 class="text-3xl text-center font-bold my-6">LLM Domain Classification Results</h1>
+      <ModelResults />
+      <Footer />
+    </div>
   </div>
 </template>
