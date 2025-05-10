@@ -3,6 +3,7 @@ import sys
 import os
 from scipy.stats import spearmanr, ttest_ind
 import json
+import datetime
 
 data_root = "../../../data"
 processed_root = os.path.join(data_root, "processed")
@@ -63,8 +64,9 @@ if __name__ == "__main__":
         "t_stars": p_value_to_stars(t_p),
         "left_n": left_df.shape[0],
         "right_n": right_df.shape[0],
+        "date": datetime.datetime.now().strftime("%Y-%m-%d"),
     }
 
-    with open(os.path.join(processed_root, f"{model_name}.json"), "a") as f:
+    with open(os.path.join(processed_root, f"{model_name}.json"), "w") as f:
         json.dump(results, f)
         f.write("\n")
