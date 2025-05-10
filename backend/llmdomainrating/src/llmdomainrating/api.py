@@ -35,3 +35,14 @@ class OpenAIClient:
         except Exception as e:
             print(f"Error: {e}")
             return None
+
+
+def create_api_client(provider: str, api_key: str = None):
+    provider_mapping = {
+        "openai": OpenAIClient,
+    }
+    if provider not in provider_mapping:
+        raise ValueError(
+            f"Unknown provider: {provider}, must be one of {provider_mapping.keys()}"
+        )
+    return provider_mapping[provider](api_key)

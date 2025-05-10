@@ -1,6 +1,6 @@
 from llmdomainrating import *
 
-client = OpenAIClient()
+client = create_api_client("openai")
 
 resp = client.response_api("tampabay.com", "gpt-4o-mini")
 
