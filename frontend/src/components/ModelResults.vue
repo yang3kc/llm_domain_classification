@@ -78,7 +78,7 @@ const formatPValue = (pValue) => {
     <!-- Correlation Results Table -->
     <h2 class="text-xl font-bold mb-4">Correlation Results (Sorted by Spearman's ρ)</h2>
     <div class="rounded-box border border-base-content/5 bg-base-100">
-      <table class="table w-full">
+      <table class="table table-zebra w-full">
         <thead>
           <tr class="bg-base-200">
             <th>
@@ -124,7 +124,7 @@ const formatPValue = (pValue) => {
     <!-- Bias Results Table -->
     <h2 class="text-xl font-bold mb-4">Bias Results (Sorted by t-statistic)</h2>
     <div class="rounded-box border border-base-content/5 bg-base-100">
-      <table class="table w-full">
+      <table class="table table-zebra w-full">
         <thead>
           <tr class="bg-base-200">
             <th>
