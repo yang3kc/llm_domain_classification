@@ -18,10 +18,11 @@ project_root/
 ├── .gitignore
 ├── .env.sample                 # API keys (NOT committed)
 ├── data/                       # Raw + processed model outputs
-│   ├── raw/                   # Original LLM responses
-│   └── processed/             # Analyzed and formatted data
+│   ├── source/                   # Source files
+│   ├── intermediate/             # Intermediate files
+│   └── processed/                # Analyzed and formatted data
 ├── backend/                    # Python component
-│   └── workflow/              # The workflows
+│   └── workflow/                 # The workflows
 ├── frontend/                   # Vue 3 + Vite app
 └── .github/
     └── workflows/
@@ -35,14 +36,9 @@ project_root/
 1. Set up Python environment using `uv`:
    ```bash
    cd backend
-   uv venv
-   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-   uv pip install -r requirements.txt
+   uv sync
    ```
 
-2. Configure environment variables:
-   - Copy `.env.sample` to `.env`
-   - Add your API keys and configuration
 
 ### Frontend
 
