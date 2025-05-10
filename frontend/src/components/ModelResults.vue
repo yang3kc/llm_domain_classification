@@ -117,13 +117,13 @@ const formatPValue = (pValue) => {
             </th>
             <th class="text-right">
               Left/Right
-              <div class="tooltip tooltip-right" data-tip="Number of domains classified as left-leaning vs right-leaning">
+              <div class="tooltip tooltip-right" data-tip="Number of domains classified as left-leaning vs right-leaning and processed by the model">
                 <span class="text-xs ml-1 opacity-50 cursor-help">?</span>
               </div>
             </th>
             <th class="text-right">
               t-value
-              <div class="tooltip tooltip-left" data-tip="T-statistic measuring the bias between left and right classifications">
+              <div class="tooltip tooltip-left" data-tip="T-statistic measuring the bias between left and right classifications. Negative t-values indicate left-leaning bias, positive t-values indicate right-leaning bias. The stars indicate the significance level of the t-statistic: *** p < 0.001, ** p < 0.01, * p < 0.05, NS p >= 0.05">
                 <span class="text-xs ml-1 opacity-50 cursor-help">?</span>
               </div>
             </th>
