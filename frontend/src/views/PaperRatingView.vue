@@ -1,6 +1,32 @@
 <script setup>
 import NavBar from '@/components/NavBar.vue'
 import Footer from '@/components/Footer.vue'
+import { ref } from 'vue'
+
+const bibtex = `@misc{yang2024accuracy,
+  title={Accuracy and political bias of news source credibility ratings by large language models},
+  author={Kai-Cheng Yang and Filippo Menczer},
+  year={2024},
+  eprint={2304.00228},
+  archivePrefix={arXiv},
+  primaryClass={cs.CL},
+  url={https://arxiv.org/abs/2304.00228},
+  journal={Forthcoming in the proceedings of ACM Web Science Conference; arXiv:2304.00228}
+}`
+
+const copySuccess = ref(false)
+
+const copyToClipboard = async () => {
+  try {
+    await navigator.clipboard.writeText(bibtex)
+    copySuccess.value = true
+    setTimeout(() => {
+      copySuccess.value = false
+    }, 2000)
+  } catch (err) {
+    console.error('Failed to copy text: ', err)
+  }
+}
 </script>
 
 <template>
@@ -44,7 +70,42 @@ import Footer from '@/components/Footer.vue'
         These findings have important implications for the use of LLMs in curating news and political information.
         </p>
       </div>
+      <!-- bib -->
+      <div class="prose-h2 prose-xl prose-slate text-center font-bold my-4">Bibtex</div>
+      <div class="prose prose prose-slate max-w-none my-4 relative">
+        <button
+          @click="copyToClipboard"
+          class="btn btn-sm btn-neutral absolute top-2 right-2"
+          :class="{ 'btn-success': copySuccess }"
+        >
+          <font-awesome-icon :icon="['fas', 'copy']" class="mr-2" />
+          {{ copySuccess ? 'Copied!' : 'Copy' }}
+        </button>
+        <pre><code>{{ bibtex }}</code></pre>
+      </div>
     </div>
     <Footer />
   </div>
 </template>
+
+<style scoped>
+pre {
+  position: relative;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+}
+
+code {
+  font-family: monospace;
+  white-space: pre;
+}
+
+.btn {
+  z-index: 10;
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+}
+</style>
