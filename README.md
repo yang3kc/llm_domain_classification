@@ -36,14 +36,9 @@ project_root/
 1. Set up Python environment using `uv`:
    ```bash
    cd backend
-   uv venv
-   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-   uv pip install -r requirements.txt
+   uv sync
    ```
 
-2. Configure environment variables:
-   - Copy `.env.sample` to `.env`
-   - Add your API keys and configuration
 
 ### Frontend
 
