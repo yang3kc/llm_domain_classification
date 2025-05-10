@@ -8,14 +8,33 @@ from llmdomainrating.prompts import (
 )
 
 
-class OpenAIClient:
+class BaseClient:
+    def __init__(self, api_key: str = None):
+        self.api_key = api_key
+        self._create_api_client()
+
+    def _create_api_client(self):
+        raise NotImplementedError("Subclasses must implement this method")
+
+    def query_model(self, domain: str, model: str) -> str:
+        raise NotImplementedError("Subclasses must implement this method")
+
+
+class OpenAIClient(BaseClient):
     def __init__(self, api_key: str = None):
         if api_key is None:
             load_dotenv()
             api_key = os.getenv("OPENAI_API_KEY")
-        self.client = OpenAI(api_key=api_key)
+        super().__init__(api_key)
 
-    def response_api(self, domain: str, model: str):
+    def _create_api_client(self):
+        self.client = OpenAI(api_key=self.api_key)
+
+    def query_model(self, domain: str, model: str) -> str:
+        resp = self.response_api(domain, model)
+        return resp
+
+    def response_api(self, domain: str, model: str) -> str:
         try:
             resp = self.client.responses.parse(
                 model=model,
