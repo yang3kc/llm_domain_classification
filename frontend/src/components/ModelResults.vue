@@ -61,7 +61,7 @@ const formatPValue = (pValue) => {
 <template>
   <div class="space-y-8">
     <!-- Correlation Results Table -->
-    <h2 class="text-xl font-bold mb-4">Correlation Results (Sorted by ρ)</h2>
+    <h2 class="text-xl font-bold mb-4">Correlation Results (Sorted by Spearman's ρ)</h2>
     <div class="rounded-box border border-base-content/5 bg-base-100">
       <table class="table w-full">
         <thead>
@@ -74,13 +74,13 @@ const formatPValue = (pValue) => {
             </th>
             <th class="text-right">
               N (%)
-              <div class="tooltip tooltip-right" data-tip="Number of domains processed (percentage of total domains)">
+              <div class="tooltip tooltip-right" data-tip="Number of domains processed by the model (percentage of total domains)">
                 <span class="text-xs ml-1 opacity-50 cursor-help">?</span>
               </div>
             </th>
             <th class="text-right">
               Spearman's ρ
-              <div class="tooltip tooltip-left" data-tip="Spearman's rank correlation coefficient between model predictions and ground truth">
+              <div class="tooltip tooltip-left" data-tip="Spearman's rank correlation coefficient between model predictions and human expert ratings. The stars indicate the significance level of the correlation coefficient: *** p < 0.001, ** p < 0.01, * p < 0.05, NS p >= 0.05">
                 <span class="text-xs ml-1 opacity-50 cursor-help">?</span>
               </div>
             </th>
@@ -104,7 +104,7 @@ const formatPValue = (pValue) => {
     </div>
 
     <!-- Bias Results Table -->
-    <h2 class="text-xl font-bold mb-4">Bias Results (Sorted by t-value)</h2>
+    <h2 class="text-xl font-bold mb-4">Bias Results (Sorted by t-statistic)</h2>
     <div class="rounded-box border border-base-content/5 bg-base-100">
       <table class="table w-full">
         <thead>
