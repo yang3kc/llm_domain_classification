@@ -4,6 +4,7 @@ import os
 
 
 def load_api_key(api_key_path, provider):
+    provider = provider.lower()
     with open(api_key_path) as f:
         key_obj = json.load(f)
         if provider not in key_obj:
