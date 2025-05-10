@@ -10,7 +10,7 @@ import NavBar from '@/components/NavBar.vue'
     <div class="container">
       <h1 class="text-3xl text-center font-bold my-6">LLM Domain Classification Results</h1>
       <ModelResults />
-      <Footer />
     </div>
+    <Footer />
   </div>
 </template>
