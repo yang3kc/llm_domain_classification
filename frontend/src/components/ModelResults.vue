@@ -242,6 +242,14 @@ const isWithinMonth = (dateStr) => {
         Note that the dashboard is different from the paper in the following respects: (1) The dashboard includes more recent models from more providers. (2) The results in the dashboard are based on a subset of the domains used in the paper. Only 5,653 domains are used in the dashboard. (3) The dashboard leverages a more comprehensive <a href="https://github.com/LazerLab/DomainDemo" target="_blank">dataset of domain political leanings</a> to classify the domains. All 5,653 domains has political leaning scores. In the paper, only 2,683 domains have political leaning scores.
       </p>
     </div>
+
+    <!-- Citation -->
+    <h2 class="text-xl text-center font-bold mb-4">Citation</h2>
+    <div class="prose prose-slate max-w-none">
+      <p>
+        If you use this dashboard in your work, please cite this <router-link to="/paper-rating">paper</router-link>.
+      </p>
+    </div>
   </div>
 </template>
 
