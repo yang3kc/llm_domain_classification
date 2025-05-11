@@ -11,3 +11,8 @@ uv run gen_stats.py ../../../data/intermediate/parsed_responses/anthropic/claude
 uv run gen_stats.py ../../../data/intermediate/parsed_responses/anthropic/claude-3-5-sonnet-20241022.parquet claude-3-5-sonnet-20241022 Anthropic
 
 uv run gen_stats.py ../../../data/intermediate/parsed_responses/anthropic/claude-3-7-sonnet-20250219.parquet claude-3-7-sonnet-20250219 Anthropic
+
+# XAI
+uv run gen_stats.py ../../../data/intermediate/parsed_responses/xai/grok-3-beta.parquet grok-3-beta XAI
+
+uv run gen_stats.py ../../../data/intermediate/parsed_responses/xai/grok-3-mini-beta.parquet grok-3-mini-beta XAI
