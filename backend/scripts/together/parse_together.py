@@ -26,9 +26,6 @@ for file_name in os.listdir(resp_path):
                 rating_dict["cost"] = cost_dict["cost"]
                 rating_dict["input_token_count"] = cost_dict["token_count"]["input"]
                 rating_dict["output_token_count"] = cost_dict["token_count"]["output"]
-                rating_dict["cached_token_count"] = cost_dict["token_count"][
-                    "cached_tokens"
-                ]
 
                 rating_dict_list.append(rating_dict)
             except Exception as e:

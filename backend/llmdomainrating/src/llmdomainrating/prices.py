@@ -150,7 +150,7 @@ class TogetherCostCalculator(CostCalculatorBase):
         token_count = {
             "input": usage["prompt_tokens"],
             "output": usage["completion_tokens"],
-            "cached_tokens": usage["cached_tokens"],
+            # "cached_tokens": usage["cached_tokens"], # not always available
         }
         return token_count
 
