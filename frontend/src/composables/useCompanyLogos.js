@@ -4,6 +4,7 @@ import Google from '../assets/Google.svg'
 import Meta from '../assets/Meta.svg'
 import DeepSeek from '../assets/DeepSeek.svg'
 import XAI from '../assets/XAI.svg'
+import logo from '../assets/logo.svg'
 
 export const companyLogos = {
   OpenAI,
@@ -11,7 +12,8 @@ export const companyLogos = {
   Google,
   Meta,
   DeepSeek,
-  XAI
+  XAI,
+  logo
 }
 
 export function useCompanyLogos() {
