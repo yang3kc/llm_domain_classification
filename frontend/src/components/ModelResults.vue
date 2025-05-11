@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 import { useCompanyLogos } from '../composables/useCompanyLogos'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 const { companyLogos, formatCompany } = useCompanyLogos()
 
@@ -23,7 +24,8 @@ const correlationResults = computed(() => {
       rho: result.rho,
       rho_p: result.rho_p,
       company: result.company,
-      date: result.date
+      date: result.date,
+      reasoning_type: result.reasoning_type
     }))
     .sort((a, b) => b.rho - a.rho) // Sort by rho in descending order
 })
@@ -38,7 +40,8 @@ const biasResults = computed(() => {
       t: result.t,
       t_p: result.t_p,
       company: result.company,
-      date: result.date
+      date: result.date,
+      reasoning_type: result.reasoning_type
     }))
     .sort((a, b) => a.t - b.t) // Sort by t in ascending order
   biasResults_internal.forEach(result => {
@@ -158,6 +161,7 @@ const isWithinMonth = (dateStr) => {
           <tr v-for="result in correlationResults" :key="result.model_name" class="hover">
             <td class="font-mono text-sm">
               {{ result.model_name }}
+              <font-awesome-icon v-if="result.reasoning_type === 'reasoning'" icon="brain" class="ml-1 text-accent" />
               <span v-if="isWithinMonth(result.date)" class="badge badge-outline badge-accent badge-sm ml-1">New</span>
             </td>
             <td class="text-right">{{ result.n }}({{ formatPercentage(result.n) }}%)</td>
