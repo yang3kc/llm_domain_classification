@@ -109,10 +109,45 @@ class AnthropicClient(BaseClient):
             return None
 
 
+class XAIAPIClient(BaseClient):
+    def __init__(self, api_key: str = None):
+        if api_key is None:
+            load_dotenv()
+            api_key = os.getenv("XAI_API_KEY")
+        super().__init__(api_key)
+
+    def _create_api_client(self):
+        self.client = OpenAI(api_key=self.api_key, base_url="https://api.x.ai/v1")
+
+    def query_model(self, domain: str, model: str) -> str:
+        try:
+            resp = self.client.chat.completions.create(
+                model=model,
+                messages=[
+                    {"role": "system", "content": SYS_BASE},
+                    {"role": "user", "content": USER_INSTRUCTION.format(domain=domain)},
+                ],
+                temperature=0,
+                response_format={
+                    "type": "json_schema",
+                    "json_schema": {
+                        "name": "domain_rating",
+                        "strict": True,
+                        "schema": DOMAIN_RATING_JSON_SCHEMA,
+                    },
+                },
+            )
+            return resp.model_dump_json()
+        except Exception as e:
+            print(f"Error: {e}")
+            return None
+
+
 def create_api_client(provider: str, api_key: str = None):
     provider_mapping = {
         "openai": OpenAIClient,
         "anthropic": AnthropicClient,
+        "xai": XAIAPIClient,
     }
     if provider not in provider_mapping:
         raise ValueError(
