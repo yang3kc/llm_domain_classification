@@ -7,7 +7,7 @@ import NavBar from '@/components/NavBar.vue'
 <template>
   <div>
     <NavBar />
-    <div class="container">
+    <div class="container mx-auto">
       <ModelResults />
     </div>
     <Footer />
