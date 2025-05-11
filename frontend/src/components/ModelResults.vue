@@ -134,7 +134,10 @@ const formatCompany = (company) => {
             :value="company"
             v-model="selectedCompanies"
           />
-          <span class="label-text">{{ company }}</span>
+          <span class="label-text flex items-center gap-1">
+            <img v-if="companyLogos[company]" :src="companyLogos[company]" :alt="company" class="h-4 inline-block" />
+            {{ company }}
+          </span>
         </label>
       </div>
     </div>
