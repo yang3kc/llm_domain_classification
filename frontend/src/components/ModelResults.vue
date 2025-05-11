@@ -1,20 +1,8 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
-import OpenAI from '../assets/OpenAI.svg'
-import Anthropic from '../assets/Anthropic.svg'
-import Google from '../assets/Google.svg'
-import Meta from '../assets/Meta.svg'
-import DeepSeek from '../assets/DeepSeek.svg'
-import XAI from '../assets/XAI.svg'
+import { useCompanyLogos } from '../composables/useCompanyLogos'
 
-const companyLogos = {
-  OpenAI,
-  Anthropic,
-  Google,
-  Meta,
-  DeepSeek,
-  XAI
-}
+const { companyLogos, formatCompany } = useCompanyLogos()
 
 const totalNumberOfDomains = 5653
 const results = ref([])
@@ -106,15 +94,6 @@ const isWithinMonth = (dateStr) => {
   const diffTime = Math.abs(now - date)
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
   return diffDays <= 30
-}
-
-// Format company name with logo
-const formatCompany = (company) => {
-  const logo = companyLogos[company]
-  if (logo) {
-    return `<img src="${logo}" alt="${company}" class="h-6 inline-block mr-1" /> ${company}`
-  }
-  return company
 }
 </script>
 
