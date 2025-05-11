@@ -10,7 +10,8 @@ const correlationResults = computed(() => {
       n: result.n,
       rho: result.rho,
       rho_p: result.rho_p,
-      company: result.company
+      company: result.company,
+      date: result.date
     }))
     .sort((a, b) => b.rho - a.rho) // Sort by rho in descending order
 })
@@ -23,7 +24,8 @@ const biasResults = computed(() => {
       right_n: result.right_n,
       t: result.t,
       t_p: result.t_p,
-      company: result.company
+      company: result.company,
+      date: result.date
     }))
     .sort((a, b) => a.t - b.t) // Sort by t in ascending order
   biasResults_internal.forEach(result => {
@@ -71,6 +73,15 @@ const formatPValue = (pValue) => {
   const stars = pValueToStars(pValue)
   return stars
 }
+
+// Check if date is within a month
+const isWithinMonth = (dateStr) => {
+  const date = new Date(dateStr)
+  const now = new Date()
+  const diffTime = Math.abs(now - date)
+  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
+  return diffDays <= 30
+}
 </script>
 
 <template>
@@ -110,7 +121,10 @@ const formatPValue = (pValue) => {
         </thead>
         <tbody>
           <tr v-for="result in correlationResults" :key="result.model_name" class="hover">
-            <td class="font-mono text-sm">{{ result.model_name }}</td>
+            <td class="font-mono text-sm">
+              {{ result.model_name }}
+              <span v-if="isWithinMonth(result.date)" class="badge badge-outline badge-accent badge-sm ml-1">New</span>
+            </td>
             <td class="text-right">{{ result.n }}({{ formatPercentage(result.n) }}%)</td>
             <td class="text-right">
               {{ formatNumber(result.rho) }}
@@ -156,7 +170,10 @@ const formatPValue = (pValue) => {
         </thead>
         <tbody>
           <tr v-for="result in biasResults" :key="result.model_name" class="hover">
-            <td class="font-mono text-sm">{{ result.model_name }}</td>
+            <td class="font-mono text-sm">
+              {{ result.model_name }}
+              <span v-if="isWithinMonth(result.date)" class="badge badge-outline badge-accent badge-sm ml-1">New</span>
+            </td>
             <td class="text-right">
                 <div class="flex justify-end items-center gap-2">
                     <span class="text-info-content">{{ result.left_n }}</span>
