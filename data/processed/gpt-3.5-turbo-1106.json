@@ -1,1 +1,1 @@
-{"n":5506,"rho":0.5616196517,"rho_p":0.0,"rho_stars":"***","left_n":3424,"right_n":2082,"t":-15.8848050946,"t_p":1.366752856e-55,"t_stars":"***","model_name": "gpt-3.5-turbo-1106","company":"OpenAI","date":"2024-07-13"}
+{"n":5506,"rho":0.5616196517,"rho_p":0.0,"rho_stars":"***","left_n":3424,"right_n":2082,"t":-15.8848050946,"t_p":1.366752856e-55,"t_stars":"***","model_name": "gpt-3.5-turbo-1106","company":"OpenAI","date":"2024-07-13", "reasoning_type": "non_reasoning"}

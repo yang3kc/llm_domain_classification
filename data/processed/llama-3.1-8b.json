@@ -1,1 +1,1 @@
-{"n":5652,"rho":0.4491017063,"rho_p":1.010024441e-278,"rho_stars":"***","left_n":3488,"right_n":2164,"t":-8.1957963104,"t_p":3.052574674e-16,"t_stars":"***","model_name": "llama-3.1-8b", "company": "Meta","date":"2024-07-23"}
+{"n":5652,"rho":0.4491017063,"rho_p":1.010024441e-278,"rho_stars":"***","left_n":3488,"right_n":2164,"t":-8.1957963104,"t_p":3.052574674e-16,"t_stars":"***","model_name": "llama-3.1-8b", "company": "Meta","date":"2024-07-23", "reasoning_type": "non_reasoning"}
