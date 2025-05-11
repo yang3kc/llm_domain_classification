@@ -1,0 +1,1 @@
+{"model_name": "Llama-4-Scout-17B-16E-Instruct", "company": "Meta", "n": 5627, "rho": 0.48402240784198264, "rho_p": 0.0, "rho_stars": "***", "t": -5.591171630452636, "t_p": 2.3616200457409377e-08, "t_stars": "***", "left_n": 3477, "right_n": 2150, "date": "2025-05-11", "cost": 0.53146665, "reasoning_type": "non_reasoning"}

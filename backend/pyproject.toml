@@ -1,0 +1,22 @@
+[project]
+name = "backend"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "anthropic>=0.51.0",
+    "google-genai>=1.14.0",
+    "json-repair>=0.44.1",
+    "llmdomainrating",
+    "openai>=1.78.0",
+    "pandas>=2.2.3",
+    "pyarrow>=20.0.0",
+    "python-dotenv>=1.1.0",
+    "scipy>=1.15.3",
+    "together>=1.5.7",
+    "tqdm>=4.67.1",
+]
+
+[tool.uv.sources]
+llmdomainrating = { path = "llmdomainrating", editable = true }
