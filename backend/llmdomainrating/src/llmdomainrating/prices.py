@@ -4,6 +4,7 @@ model_prices = {
     "OpenAI": {
         "gpt-4.1-nano-2025-04-14": {"input": 0.1, "output": 0.4, "cached_input": 0.025},
         "gpt-4.1-mini-2025-04-14": {"input": 0.4, "output": 1.6, "cached_input": 0.10},
+        "gpt-4.1-2025-04-14": {"input": 2, "output": 8, "cached_input": 0.5},
     }
 }
 
