@@ -5,7 +5,27 @@ model_prices = {
         "gpt-4.1-nano-2025-04-14": {"input": 0.1, "output": 0.4, "cached_input": 0.025},
         "gpt-4.1-mini-2025-04-14": {"input": 0.4, "output": 1.6, "cached_input": 0.10},
         "gpt-4.1-2025-04-14": {"input": 2, "output": 8, "cached_input": 0.5},
-    }
+    },
+    "Anthropic": {
+        "claude-3-5-haiku-20241022": {
+            "input": 0.8,
+            "output": 4,
+            "cache_write": 0.1,
+            "cache_read": 0.08,
+        },
+        "claude-3-5-sonnet-20241022": {
+            "input": 3,
+            "output": 15,
+            "cache_write": 3.75,
+            "cache_read": 0.3,
+        },
+        "claude-3-7-sonnet-20250219": {
+            "input": 3,
+            "output": 15,
+            "cache_write": 3.75,
+            "cache_read": 0.3,
+        },
+    },
 }
 
 
@@ -46,5 +66,30 @@ class OpenAICostCalculator(CostCalculatorBase):
             "cached_input": usage["input_tokens_details"]["cached_tokens"],
             "output": usage["output_tokens"],
             "reasoning_tokens": usage["output_tokens_details"]["reasoning_tokens"],
+        }
+        return token_count
+
+
+class AnthropicCostCalculator(CostCalculatorBase):
+    def __init__(self, model_name: str):
+        if model_name not in model_prices["Anthropic"]:
+            raise ValueError(f"Model {model_name} not found in Anthropic model prices")
+        model_unit_prices = model_prices["Anthropic"][model_name]
+        super().__init__(model_unit_prices)
+
+    def _extract_token_count(self, response) -> dict:
+        if isinstance(response, str):
+            with open(response, "r") as f:
+                data = json.load(f)
+        elif isinstance(response, dict):
+            data = response
+        else:
+            raise ValueError("Invalid response type")
+        usage = data["usage"]
+        token_count = {
+            "input": usage["input_tokens"],
+            "output": usage["output_tokens"],
+            "cache_write": usage["cache_creation_input_tokens"],
+            "cache_read": usage["cache_read_input_tokens"],
         }
         return token_count
