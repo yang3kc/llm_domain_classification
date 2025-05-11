@@ -25,6 +25,8 @@ class CostCalculatorBase:
 
 class OpenAICostCalculator(CostCalculatorBase):
     def __init__(self, model_name: str):
+        if model_name not in model_prices["OpenAI"]:
+            raise ValueError(f"Model {model_name} not found in OpenAI model prices")
         model_unit_prices = model_prices["OpenAI"][model_name]
         super().__init__(model_unit_prices)
 
