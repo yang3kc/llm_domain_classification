@@ -27,3 +27,8 @@ uv run gen_stats.py ../../../data/intermediate/parsed_responses/together/Llama-4
 uv run gen_stats.py ../../../data/intermediate/parsed_responses/together/DeepSeek-V3.parquet DeepSeek-V3 DeepSeek
 
 uv run gen_stats.py ../../../data/intermediate/parsed_responses/together/DeepSeek-R1.parquet DeepSeek-R1 DeepSeek
+
+# Google
+uv run gen_stats.py ../../../data/intermediate/parsed_responses/google/gemini-2.0-flash.parquet gemini-2.0-flash-001 Google
+
+uv run gen_stats.py ../../../data/intermediate/parsed_responses/google/gemini-2.0-flash-lite.parquet gemini-2.0-flash-lite-001 Google
