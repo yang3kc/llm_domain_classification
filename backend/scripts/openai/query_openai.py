@@ -13,5 +13,8 @@ domains_to_query = get_domain_to_query(domain_list_path, output_root)
 
 for domain in tqdm(domains_to_query):
     resp = client.query_model(domain, model)
+    if resp is None:
+        print(f"No response for {domain}")
+        continue
     with open(os.path.join(output_root, f"{domain}.txt"), "w") as f:
         f.write(resp)
