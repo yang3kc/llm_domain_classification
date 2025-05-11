@@ -26,6 +26,16 @@ model_prices = {
             "cache_read": 0.3,
         },
     },
+    "XAI": {
+        "grok-3-beta": {
+            "input": 3,
+            "output": 15,
+        },
+        "grok-3-mini-beta": {
+            "input": 0.3,
+            "output": 0.5,
+        },
+    },
 }
 
 
@@ -91,5 +101,29 @@ class AnthropicCostCalculator(CostCalculatorBase):
             "output": usage["output_tokens"],
             "cache_write": usage["cache_creation_input_tokens"],
             "cache_read": usage["cache_read_input_tokens"],
+        }
+        return token_count
+
+
+class XAICostCalculator(CostCalculatorBase):
+    def __init__(self, model_name: str):
+        if model_name not in model_prices["XAI"]:
+            raise ValueError(f"Model {model_name} not found in XAI model prices")
+        model_unit_prices = model_prices["XAI"][model_name]
+        super().__init__(model_unit_prices)
+
+    def _extract_token_count(self, response) -> dict:
+        if isinstance(response, str):
+            with open(response, "r") as f:
+                data = json.load(f)
+        elif isinstance(response, dict):
+            data = response
+        else:
+            raise ValueError("Invalid response type")
+        usage = data["usage"]
+        token_count = {
+            "input": usage["prompt_tokens"],
+            "output": usage["completion_tokens"],
+            "reasoning_tokens": usage["completion_tokens_details"]["reasoning_tokens"],
         }
         return token_count
