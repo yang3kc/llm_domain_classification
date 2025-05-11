@@ -39,6 +39,9 @@ if __name__ == "__main__":
     query_list_df = pd.read_csv(query_list_file)
 
     print(f"resp_df: {resp_df.shape}")
+    resp_df = resp_df.query("0 <= rating <= 1")
+
+    print(f"resp_df after filtering: {resp_df.shape}")
     print(f"query_list_df: {query_list_df.shape}")
     merged_df = pd.merge(resp_df, query_list_df, on="domain")
     print(f"merged_df: {merged_df.shape}")
