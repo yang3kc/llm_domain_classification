@@ -38,11 +38,11 @@ if __name__ == "__main__":
     resp_df = pd.read_parquet(resp_file_path)
     query_list_df = pd.read_csv(query_list_file)
 
-    print(f"resp_df: {resp_df.shape}")
-    resp_df = resp_df.query("0 <= rating <= 1")
-
     cost_total = resp_df.cost.sum()
     print(f"cost_total: {cost_total:.3f} USD")
+
+    print(f"resp_df: {resp_df.shape}")
+    resp_df = resp_df.query("0 <= rating <= 1")
 
     print(f"resp_df after filtering: {resp_df.shape}")
     print(f"query_list_df: {query_list_df.shape}")
