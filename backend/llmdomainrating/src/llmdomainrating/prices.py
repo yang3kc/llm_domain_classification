@@ -41,7 +41,10 @@ model_prices = {
 
 
 class CostCalculatorBase:
-    def __init__(self, model_unit_prices: dict):
+    def __init__(self, model_name: str, provider: str):
+        if model_name not in model_prices[provider]:
+            raise ValueError(f"Model {model_name} not found in {provider} model prices")
+        model_unit_prices = model_prices[provider][model_name]
         self.model_unit_prices = model_unit_prices
 
     def calculate_cost(self, response: str) -> dict:
@@ -72,10 +75,7 @@ class CostCalculatorBase:
 
 class OpenAICostCalculator(CostCalculatorBase):
     def __init__(self, model_name: str):
-        if model_name not in model_prices["OpenAI"]:
-            raise ValueError(f"Model {model_name} not found in OpenAI model prices")
-        model_unit_prices = model_prices["OpenAI"][model_name]
-        super().__init__(model_unit_prices)
+        super().__init__(model_name, "OpenAI")
 
     def _extract_token_count(self, resp_obj: dict) -> dict:
         usage = resp_obj["usage"]
@@ -90,10 +90,7 @@ class OpenAICostCalculator(CostCalculatorBase):
 
 class AnthropicCostCalculator(CostCalculatorBase):
     def __init__(self, model_name: str):
-        if model_name not in model_prices["Anthropic"]:
-            raise ValueError(f"Model {model_name} not found in Anthropic model prices")
-        model_unit_prices = model_prices["Anthropic"][model_name]
-        super().__init__(model_unit_prices)
+        super().__init__(model_name, "Anthropic")
 
     def _extract_token_count(self, resp_obj: dict) -> dict:
         usage = resp_obj["usage"]
@@ -108,10 +105,7 @@ class AnthropicCostCalculator(CostCalculatorBase):
 
 class XAICostCalculator(CostCalculatorBase):
     def __init__(self, model_name: str):
-        if model_name not in model_prices["XAI"]:
-            raise ValueError(f"Model {model_name} not found in XAI model prices")
-        model_unit_prices = model_prices["XAI"][model_name]
-        super().__init__(model_unit_prices)
+        super().__init__(model_name, "XAI")
 
     def _extract_token_count(self, resp_obj: dict) -> dict:
         usage = resp_obj["usage"]
