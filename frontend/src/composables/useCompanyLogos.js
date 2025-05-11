@@ -18,7 +18,7 @@ export function useCompanyLogos() {
   const formatCompany = (company) => {
     const logo = companyLogos[company]
     if (logo) {
-      return `<img src="${logo}" alt="${company}" class="h-6 inline-block mr-1" /> ${company}`
+      return `<img src="${logo}" alt="${company}" class="h-5 inline-block mr-1" /> ${company}`
     }
     return company
   }
