@@ -46,13 +46,27 @@ class CostCalculatorBase:
 
     def calculate_cost(self, response: str) -> dict:
         price_unit = 1_000_000
-        token_count = self._extract_token_count(response)
+        resp_obj = self._parse_response(response)
+        token_count = self._extract_token_count(resp_obj)
         cost = 0
         for item, num in token_count.items():
             cost += self.model_unit_prices.get(item, 0) * num / price_unit
         return {"cost": cost, "token_count": token_count}
 
-    def _extract_token_count(self, response: str) -> dict:
+    def _parse_response(self, response) -> dict:
+        if isinstance(response, str):
+            if response.endswith(".json"):
+                with open(response, "r") as f:
+                    resp = json.load(f)
+            else:
+                resp = json.loads(response)
+        elif isinstance(response, dict):
+            resp = response
+        else:
+            raise ValueError("Invalid response type")
+        return resp
+
+    def _extract_token_count(self, resp_obj: dict) -> dict:
         raise NotImplementedError("Subclasses must implement this method")
 
 
@@ -63,15 +77,8 @@ class OpenAICostCalculator(CostCalculatorBase):
         model_unit_prices = model_prices["OpenAI"][model_name]
         super().__init__(model_unit_prices)
 
-    def _extract_token_count(self, response) -> dict:
-        if isinstance(response, str):
-            with open(response, "r") as f:
-                data = json.load(f)
-        elif isinstance(response, dict):
-            data = response
-        else:
-            raise ValueError("Invalid response type")
-        usage = data["usage"]
+    def _extract_token_count(self, resp_obj: dict) -> dict:
+        usage = resp_obj["usage"]
         token_count = {
             "input": usage["input_tokens"],
             "cached_input": usage["input_tokens_details"]["cached_tokens"],
@@ -88,15 +95,8 @@ class AnthropicCostCalculator(CostCalculatorBase):
         model_unit_prices = model_prices["Anthropic"][model_name]
         super().__init__(model_unit_prices)
 
-    def _extract_token_count(self, response) -> dict:
-        if isinstance(response, str):
-            with open(response, "r") as f:
-                data = json.load(f)
-        elif isinstance(response, dict):
-            data = response
-        else:
-            raise ValueError("Invalid response type")
-        usage = data["usage"]
+    def _extract_token_count(self, resp_obj: dict) -> dict:
+        usage = resp_obj["usage"]
         token_count = {
             "input": usage["input_tokens"],
             "output": usage["output_tokens"],
@@ -113,15 +113,8 @@ class XAICostCalculator(CostCalculatorBase):
         model_unit_prices = model_prices["XAI"][model_name]
         super().__init__(model_unit_prices)
 
-    def _extract_token_count(self, response) -> dict:
-        if isinstance(response, str):
-            with open(response, "r") as f:
-                data = json.load(f)
-        elif isinstance(response, dict):
-            data = response
-        else:
-            raise ValueError("Invalid response type")
-        usage = data["usage"]
+    def _extract_token_count(self, resp_obj: dict) -> dict:
+        usage = resp_obj["usage"]
         token_count = {
             "input": usage["prompt_tokens"],
             "output": usage["completion_tokens"],
