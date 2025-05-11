@@ -3,6 +3,8 @@ import os
 import sys
 import pandas as pd
 import json
+from json_repair import repair_json
+import re
 
 provider = sys.argv[1]
 model = sys.argv[2]
@@ -17,6 +19,12 @@ for file_name in os.listdir(resp_path):
             resp_json = json.load(f)
             try:
                 resp_text = resp_json["choices"][0]["message"]["content"]
+
+                if "<think>" in resp_text:
+                    resp_text = repair_json(
+                        re.sub(r"<think>.*?</think>\s*", "", resp_text, flags=re.DOTALL)
+                    )
+
                 rating_obj = DomainRating.model_validate_json(resp_text)
                 rating_dict = rating_obj.model_dump()
                 rating_dict["domain"] = domain
