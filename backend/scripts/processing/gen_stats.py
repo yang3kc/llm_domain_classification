@@ -41,6 +41,9 @@ if __name__ == "__main__":
     print(f"resp_df: {resp_df.shape}")
     resp_df = resp_df.query("0 <= rating <= 1")
 
+    cost_total = resp_df.cost.sum()
+    print(f"cost_total: {cost_total:.3f} USD")
+
     print(f"resp_df after filtering: {resp_df.shape}")
     print(f"query_list_df: {query_list_df.shape}")
     merged_df = pd.merge(resp_df, query_list_df, on="domain")
@@ -68,6 +71,7 @@ if __name__ == "__main__":
         "left_n": left_df.shape[0],
         "right_n": right_df.shape[0],
         "date": datetime.datetime.now().strftime("%Y-%m-%d"),
+        "cost": cost_total,
     }
 
     with open(os.path.join(processed_root, f"{model_name}.json"), "w") as f:
