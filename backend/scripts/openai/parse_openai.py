@@ -28,3 +28,9 @@ rating_df = pd.DataFrame(rating_dict_list)
 rating_df["provider"] = provider
 rating_df["model"] = model
 rating_df.to_parquet(output_path, index=False)
+
+invalid_resp_df = rating_df.query("rating < 0 or rating > 1")
+valid_resp_df = rating_df.query("0 <= rating <= 1")
+print(f"invalid_resp_df: {invalid_resp_df.shape}")
+print(f"valid_resp_df: {valid_resp_df.shape}")
+print(f"{len(invalid_resp_df) / len(rating_df) * 100:.2f}% of responses are invalid")
