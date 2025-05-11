@@ -50,6 +50,14 @@ model_prices = {
             "input": 0.27,
             "output": 0.85,
         },
+        "DeepSeek-V3": {
+            "input": 1.25,
+            "output": 1.25,
+        },
+        "DeepSeek-R1": {
+            "input": 3,
+            "output": 7,
+        },
     },
     "Google": {
         "gemini-2.0-flash": {
