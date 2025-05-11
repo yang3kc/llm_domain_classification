@@ -34,6 +34,7 @@ model_prices = {
         "grok-3-mini-beta": {
             "input": 0.3,
             "output": 0.5,
+            "reasoning_tokens": 0.5,
         },
     },
 }
