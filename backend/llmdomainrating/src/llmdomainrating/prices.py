@@ -37,6 +37,20 @@ model_prices = {
             "reasoning_tokens": 0.5,
         },
     },
+    "Together": {
+        "Llama-3.3-70B-Instruct-Turbo": {
+            "input": 0.88,
+            "output": 0.88,
+        },
+        "Llama-4-Scout-17B-16E-Instruct": {
+            "input": 0.18,
+            "output": 0.59,
+        },
+        "Llama-4-Maverick-17B-128E-Instruct-FP8": {
+            "input": 0.27,
+            "output": 0.85,
+        },
+    },
 }
 
 
@@ -113,5 +127,19 @@ class XAICostCalculator(CostCalculatorBase):
             "input": usage["prompt_tokens"],
             "output": usage["completion_tokens"],
             "reasoning_tokens": usage["completion_tokens_details"]["reasoning_tokens"],
+        }
+        return token_count
+
+
+class TogetherCostCalculator(CostCalculatorBase):
+    def __init__(self, model_name: str):
+        super().__init__(model_name, "Together")
+
+    def _extract_token_count(self, resp_obj: dict) -> dict:
+        usage = resp_obj["usage"]
+        token_count = {
+            "input": usage["prompt_tokens"],
+            "output": usage["completion_tokens"],
+            "cached_tokens": usage["cached_tokens"],
         }
         return token_count
