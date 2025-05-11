@@ -34,6 +34,7 @@ if __name__ == "__main__":
     resp_file_path = sys.argv[1]
     model_name = sys.argv[2]
     company_name = sys.argv[3]
+    reasoning_type = sys.argv[4]
 
     resp_df = pd.read_parquet(resp_file_path)
     query_list_df = pd.read_csv(query_list_file)
@@ -72,6 +73,7 @@ if __name__ == "__main__":
         "right_n": right_df.shape[0],
         "date": datetime.datetime.now().strftime("%Y-%m-%d"),
         "cost": cost_total,
+        "reasoning_type": reasoning_type,
     }
 
     with open(os.path.join(processed_root, f"{model_name}.json"), "w") as f:
