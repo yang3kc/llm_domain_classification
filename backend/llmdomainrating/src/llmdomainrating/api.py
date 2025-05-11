@@ -1,9 +1,13 @@
 import os
 from dotenv import load_dotenv
+
 from openai import OpenAI
+from anthropic import Anthropic
+
 from llmdomainrating.prompts import (
     SYS_BASE,
     USER_INSTRUCTION,
+    USER_FORMAT,
     DOMAIN_RATING_JSON_SCHEMA,
 )
 
@@ -75,9 +79,40 @@ class OpenAIClient(BaseClient):
             return None
 
 
+class AnthropicClient(BaseClient):
+    def __init__(self, api_key: str = None):
+        if api_key is None:
+            load_dotenv()
+            api_key = os.getenv("ANTHROPIC_API_KEY")
+        super().__init__(api_key)
+
+    def _create_api_client(self):
+        self.client = Anthropic(api_key=self.api_key)
+
+    def query_model(self, domain: str, model: str) -> str:
+        try:
+            resp = self.client.messages.create(
+                model=model,
+                system=SYS_BASE,
+                messages=[
+                    {
+                        "role": "user",
+                        "content": f"{USER_INSTRUCTION.format(domain=domain)}\n{USER_FORMAT}",
+                    }
+                ],
+                max_tokens=8192,
+                temperature=0,
+            )
+            return resp.to_json()
+        except Exception as e:
+            print(f"Error: {e}")
+            return None
+
+
 def create_api_client(provider: str, api_key: str = None):
     provider_mapping = {
         "openai": OpenAIClient,
+        "anthropic": AnthropicClient,
     }
     if provider not in provider_mapping:
         raise ValueError(
