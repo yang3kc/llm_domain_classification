@@ -1,4 +1,4 @@
-from llmdomainrating.prompts import DomainRating
+from llmdomainrating import DomainRating, OpenAICostCalculator
 import os
 import sys
 import pandas as pd
@@ -8,6 +8,8 @@ provider = sys.argv[1]
 model = sys.argv[2]
 resp_path = sys.argv[3]
 output_path = sys.argv[-1]
+
+cost_calculator = OpenAICostCalculator(model)
 
 rating_dict_list = []
 for file_name in os.listdir(resp_path):
@@ -20,6 +22,18 @@ for file_name in os.listdir(resp_path):
                 rating_obj = DomainRating.model_validate_json(resp_text)
                 rating_dict = rating_obj.model_dump()
                 rating_dict["domain"] = domain
+
+                cost_dict = cost_calculator.calculate_cost(resp_json)
+                rating_dict["cost"] = cost_dict["cost"]
+                rating_dict["input_token_count"] = cost_dict["token_count"]["input"]
+                rating_dict["output_token_count"] = cost_dict["token_count"]["output"]
+                rating_dict["cached_input_token_count"] = cost_dict["token_count"][
+                    "cached_input"
+                ]
+                rating_dict["reasoning_token_count"] = cost_dict["token_count"][
+                    "reasoning_tokens"
+                ]
+
                 rating_dict_list.append(rating_dict)
             except Exception as e:
                 print(f"Error parsing {file_name}: {e}")
