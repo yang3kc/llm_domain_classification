@@ -1,5 +1,20 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue'
+import OpenAI from '../assets/OpenAI.svg'
+import Anthropic from '../assets/Anthropic.svg'
+import Google from '../assets/Google.svg'
+import Meta from '../assets/Meta.svg'
+import DeepSeek from '../assets/DeepSeek.svg'
+import XAI from '../assets/XAI.svg'
+
+const companyLogos = {
+  OpenAI,
+  Anthropic,
+  Google,
+  Meta,
+  DeepSeek,
+  XAI
+}
 
 const totalNumberOfDomains = 5653
 const results = ref([])
@@ -92,6 +107,15 @@ const isWithinMonth = (dateStr) => {
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
   return diffDays <= 30
 }
+
+// Format company name with logo
+const formatCompany = (company) => {
+  const logo = companyLogos[company]
+  if (logo) {
+    return `<img src="${logo}" alt="${company}" class="h-6 inline-block mr-1" /> ${company}`
+  }
+  return company
+}
 </script>
 
 <template>
@@ -159,7 +183,7 @@ const isWithinMonth = (dateStr) => {
               {{ formatNumber(result.rho) }}
               <span class="badge badge-info-content badge-outline badge-sm ml-1 opacity-40 cursor-help">{{ formatPValue(result.rho_p) }} </span>
             </td>
-            <td class="text-right">{{ result.company }}</td>
+            <td class="text-right" v-html="formatCompany(result.company)"></td>
           </tr>
         </tbody>
       </table>
@@ -215,7 +239,7 @@ const isWithinMonth = (dateStr) => {
               <span class="badge badge-info-content badge-outline badge-sm ml-1 opacity-40 cursor-help">{{ formatPValue(result.t_p) }} </span>
               <span class="badge badge-info-content badge-outline badge-sm ml-1 opacity-40 cursor-help">{{ formatBias(result.bias) }}</span>
             </td>
-            <td class="text-right">{{ result.company }}</td>
+            <td class="text-right" v-html="formatCompany(result.company)"></td>
           </tr>
         </tbody>
       </table>
