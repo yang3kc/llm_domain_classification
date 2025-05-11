@@ -51,6 +51,16 @@ model_prices = {
             "output": 0.85,
         },
     },
+    "Google": {
+        "gemini-2.0-flash": {
+            "input": 0.1,
+            "output": 0.4,
+        },
+        "gemini-2.0-flash-lite": {
+            "input": 0.075,
+            "output": 0.3,
+        },
+    },
 }
 
 
@@ -141,5 +151,18 @@ class TogetherCostCalculator(CostCalculatorBase):
             "input": usage["prompt_tokens"],
             "output": usage["completion_tokens"],
             "cached_tokens": usage["cached_tokens"],
+        }
+        return token_count
+
+
+class GoogleCostCalculator(CostCalculatorBase):
+    def __init__(self, model_name: str):
+        super().__init__(model_name, "Google")
+
+    def _extract_token_count(self, resp_obj: dict) -> dict:
+        usage = resp_obj["usage_metadata"]
+        token_count = {
+            "input": usage["prompt_token_count"],
+            "output": usage["candidates_token_count"],
         }
         return token_count
