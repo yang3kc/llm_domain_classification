@@ -211,6 +211,7 @@ const isWithinMonth = (dateStr) => {
           <tr v-for="result in biasResults" :key="result.model_name" class="hover">
             <td class="font-mono text-sm">
               {{ result.model_name }}
+              <font-awesome-icon v-if="result.reasoning_type === 'reasoning'" icon="brain" class="ml-1 text-accent" />
               <span v-if="isWithinMonth(result.date)" class="badge badge-outline badge-accent badge-sm ml-1">New</span>
             </td>
             <td class="text-right">
