@@ -8,6 +8,7 @@ const { companyLogos, formatCompany } = useCompanyLogos()
 const totalNumberOfDomains = 5653
 const results = ref([])
 const selectedCompanies = ref([])
+const showReasoningOnly = ref(false)
 
 // Get unique companies from results
 const uniqueCompanies = computed(() => {
@@ -17,7 +18,11 @@ const uniqueCompanies = computed(() => {
 
 const correlationResults = computed(() => {
   return results.value
-    .filter(result => selectedCompanies.value.length === 0 || selectedCompanies.value.includes(result.company))
+    .filter(result => {
+      const companyMatch = selectedCompanies.value.length === 0 || selectedCompanies.value.includes(result.company)
+      const reasoningMatch = !showReasoningOnly.value || result.reasoning_type === 'reasoning'
+      return companyMatch && reasoningMatch
+    })
     .map(result => ({
       model_name: result.model_name,
       n: result.n,
@@ -32,7 +37,11 @@ const correlationResults = computed(() => {
 
 const biasResults = computed(() => {
   let biasResults_internal = results.value
-    .filter(result => selectedCompanies.value.length === 0 || selectedCompanies.value.includes(result.company))
+    .filter(result => {
+      const companyMatch = selectedCompanies.value.length === 0 || selectedCompanies.value.includes(result.company)
+      const reasoningMatch = !showReasoningOnly.value || result.reasoning_type === 'reasoning'
+      return companyMatch && reasoningMatch
+    })
     .map(result => ({
       model_name: result.model_name,
       left_n: result.left_n,
@@ -105,25 +114,38 @@ const isWithinMonth = (dateStr) => {
     <!-- Correlation Results Table -->
     <h1 class="text-3xl text-center font-bold my-6">Accuracy and political bias of news source credibility ratings by large language models</h1>
 
-    <!-- Company Filter -->
-    <div class="flex flex-wrap gap-4 justify-center items-center mb-6">
-      <span class="font-semibold">Filter by company:</span>
-      <div class="flex flex-wrap gap-2">
-        <label v-for="company in uniqueCompanies" :key="company" class="label cursor-pointer gap-2">
+    <!-- Filters -->
+    <div class="flex flex-col gap-4 justify-center items-center mb-6">
+      <div class="flex flex-wrap gap-4 items-center">
+        <div class="flex flex-wrap gap-2">
+          <label v-for="company in uniqueCompanies" :key="company" class="label cursor-pointer gap-2">
+            <input
+              type="checkbox"
+              class="checkbox checkbox-sm"
+              :value="company"
+              v-model="selectedCompanies"
+            />
+            <span class="label-text flex items-center gap-1">
+              <img v-if="companyLogos[company]" :src="companyLogos[company]" :alt="company" class="h-4 inline-block" />
+              {{ company }}
+            </span>
+          </label>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <label class="label cursor-pointer gap-2">
           <input
             type="checkbox"
             class="checkbox checkbox-sm"
-            :value="company"
-            v-model="selectedCompanies"
+            v-model="showReasoningOnly"
           />
           <span class="label-text flex items-center gap-1">
-            <img v-if="companyLogos[company]" :src="companyLogos[company]" :alt="company" class="h-4 inline-block" />
-            {{ company }}
+            <font-awesome-icon icon="brain" class="text-accent" />
+            Reasoning models only
           </span>
         </label>
       </div>
     </div>
-
 
     <!-- Accuracy Results Table -->
     <h2 class="text-xl text-center font-bold mb-4">Accuracy (measured by correlation with human expert ratings)</h2>
