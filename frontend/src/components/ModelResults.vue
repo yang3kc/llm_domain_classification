@@ -3,7 +3,7 @@ import { ref, onMounted, computed } from 'vue'
 import { useCompanyLogos } from '../composables/useCompanyLogos'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-const { companyLogos, formatCompany } = useCompanyLogos()
+const { companyLogos, formatCompany, getCompanyLogo } = useCompanyLogos()
 
 const totalNumberOfDomains = 5653
 const results = ref([])
@@ -182,6 +182,7 @@ const isWithinMonth = (dateStr) => {
         <tbody>
           <tr v-for="result in correlationResults" :key="result.model_name" class="hover">
             <td class="font-mono text-sm">
+              <img v-if="getCompanyLogo(result.company)" :src="getCompanyLogo(result.company)" :alt="result.company" class="h-4 inline-block mr-2" />
               {{ result.model_name }}
               <font-awesome-icon v-if="result.reasoning_type === 'reasoning'" icon="brain" class="ml-1 text-accent" />
               <span v-if="isWithinMonth(result.date)" class="badge badge-outline badge-accent badge-sm ml-1">New</span>
@@ -191,7 +192,7 @@ const isWithinMonth = (dateStr) => {
               {{ formatNumber(result.rho) }}
               <span class="badge badge-info-content badge-outline badge-sm ml-1 opacity-40 cursor-help">{{ formatPValue(result.rho_p) }} </span>
             </td>
-            <td class="text-right" v-html="formatCompany(result.company)"></td>
+            <td class="text-right">{{ result.company }}</td>
           </tr>
         </tbody>
       </table>
@@ -232,6 +233,7 @@ const isWithinMonth = (dateStr) => {
         <tbody>
           <tr v-for="result in biasResults" :key="result.model_name" class="hover">
             <td class="font-mono text-sm">
+              <img v-if="getCompanyLogo(result.company)" :src="getCompanyLogo(result.company)" :alt="result.company" class="h-4 inline-block mr-2" />
               {{ result.model_name }}
               <font-awesome-icon v-if="result.reasoning_type === 'reasoning'" icon="brain" class="ml-1 text-accent" />
               <span v-if="isWithinMonth(result.date)" class="badge badge-outline badge-accent badge-sm ml-1">New</span>
@@ -248,7 +250,7 @@ const isWithinMonth = (dateStr) => {
               <span class="badge badge-info-content badge-outline badge-sm ml-1 opacity-40 cursor-help">{{ formatPValue(result.t_p) }} </span>
               <span class="badge badge-info-content badge-outline badge-sm ml-1 opacity-40 cursor-help">{{ formatBias(result.bias) }}</span>
             </td>
-            <td class="text-right" v-html="formatCompany(result.company)"></td>
+            <td class="text-right">{{ result.company }}</td>
           </tr>
         </tbody>
       </table>

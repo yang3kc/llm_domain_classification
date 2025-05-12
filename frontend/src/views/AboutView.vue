@@ -26,13 +26,23 @@ const { companyLogos } = useCompanyLogos()
           LLMs are increasingly used as information curators in our daily lives, thus their knowledge of news sources is crucial to the quality of the information they provide us.
         </p>
         <p>
-          To answer this question, we use a pre-defined list of news domains with credibility ratings produced by human experts as our ground truth.
+          To answer this question, we use a pre-defined list of news domains with <strong>credibility ratings</strong> produced by human experts as our ground truth.
           We further test LLMs from different providers on this task and evaluate their performance.
-          We also measure the <strong>political bias</strong> of LLMs on this task by comparing the ratings of the the models on the left-leaning and right-leaning domains.
+          We also measure the <strong>political bias</strong> of LLMs on this task by comparing the ratings of the the models on the left-leaning and right-leaning domains in the U.S. context.
         </p>
         <p>
-          See <router-link to="/" class="link link-neutral">Results</router-link> page for the results.
-          See <router-link to="/paper-rating" class="link link-neutral">Paper</router-link> page for more details.
+          See <router-link to="/" class="link link-neutral">Dashboard</router-link> page for the results.
+          See <router-link to="/paper-rating" class="link link-neutral">paper</router-link> page for more details.
+        </p>
+      </article>
+
+      <div class="divider divider-neutral my-8"></div>
+
+      <article class="prose prose-slate max-w-none">
+        <div class="prose-h1 prose-2xl prose-slate font-bold mt-5 text-center">About this website</div>
+        <p>
+          This website uses <a href="https://vuejs.org/" class="link link-neutral" target="_blank">Vue.js</a> <a href="https://tailwindcss.com/" class="link link-neutral" target="_blank">Tailwind CSS</a>, <a href="https://daisyui.com/" class="link link-neutral" target="_blank">DaisyUI</a> and <a href="https://fontawesome.com/" class="link link-neutral" target="_blank">FontAwesome</a>.
+          The source code was "vibe-coded" with <a href="https://www.cursor.com/" class="link link-neutral" target="_blank">Cursor</a>.
         </p>
       </article>
 

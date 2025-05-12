@@ -24,9 +24,13 @@ export function useCompanyLogos() {
     }
     return company
   }
+  const getCompanyLogo = (company) => {
+    return companyLogos[company]
+  }
 
   return {
     companyLogos,
-    formatCompany
+    formatCompany,
+    getCompanyLogo
   }
 }
