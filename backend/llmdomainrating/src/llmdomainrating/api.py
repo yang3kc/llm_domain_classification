@@ -76,6 +76,14 @@ class OpenAIClient(BaseClient):
                     "effort": "medium",
                     "summary": "auto",
                 },
+                text={
+                    "format": {
+                        "type": "json_schema",
+                        "name": "domain_rating",
+                        "strict": True,
+                        "schema": DOMAIN_RATING_JSON_SCHEMA,
+                    }
+                },
             )
             return resp.model_dump_json()
         except Exception as e:
