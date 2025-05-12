@@ -26,13 +26,13 @@ const { companyLogos } = useCompanyLogos()
           LLMs are increasingly used as information curators in our daily lives, thus their knowledge of news sources is crucial to the quality of the information they provide us.
         </p>
         <p>
-          To answer this question, we use a pre-defined list of news domains with credibility ratings produced by human experts as our ground truth.
+          To answer this question, we use a pre-defined list of news domains with <strong>credibility ratings</strong> produced by human experts as our ground truth.
           We further test LLMs from different providers on this task and evaluate their performance.
-          We also measure the <strong>political bias</strong> of LLMs on this task by comparing the ratings of the the models on the left-leaning and right-leaning domains.
+          We also measure the <strong>political bias</strong> of LLMs on this task by comparing the ratings of the the models on the left-leaning and right-leaning domains in the U.S. context.
         </p>
         <p>
-          See <router-link to="/" class="link link-neutral">Results</router-link> page for the results.
-          See <router-link to="/paper-rating" class="link link-neutral">Paper</router-link> page for more details.
+          See <router-link to="/" class="link link-neutral">Dashboard</router-link> page for the results.
+          See <router-link to="/paper-rating" class="link link-neutral">paper</router-link> page for more details.
         </p>
       </article>
 
