@@ -5,7 +5,10 @@ model_prices = {
         "gpt-4.1-nano-2025-04-14": {"input": 0.1, "output": 0.4, "cached_input": 0.025},
         "gpt-4.1-mini-2025-04-14": {"input": 0.4, "output": 1.6, "cached_input": 0.10},
         "gpt-4.1-2025-04-14": {"input": 2, "output": 8, "cached_input": 0.5},
+        "o1-2024-12-17": {"input": 15, "output": 60, "cached_input": 7.5},
+        "o3-2025-04-16": {"input": 10, "output": 40, "cached_input": 2.5},
         "o3-mini-2025-01-31": {"input": 1.1, "output": 4.4, "cached_input": 0.55},
+        "o4-mini-2025-04-16": {"input": 1.1, "output": 4.4, "cached_input": 0.275},
     },
     "Anthropic": {
         "claude-3-5-haiku-20241022": {
