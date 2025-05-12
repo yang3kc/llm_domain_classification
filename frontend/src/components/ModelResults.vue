@@ -192,7 +192,7 @@ const isWithinMonth = (dateStr) => {
               {{ formatNumber(result.rho) }}
               <span class="badge badge-info-content badge-outline badge-sm ml-1 opacity-40 cursor-help">{{ formatPValue(result.rho_p) }} </span>
             </td>
-            <td class="text-right" v-html="formatCompany(result.company)"></td>
+            <td class="text-right">{{ result.company }}</td>
           </tr>
         </tbody>
       </table>
@@ -250,7 +250,7 @@ const isWithinMonth = (dateStr) => {
               <span class="badge badge-info-content badge-outline badge-sm ml-1 opacity-40 cursor-help">{{ formatPValue(result.t_p) }} </span>
               <span class="badge badge-info-content badge-outline badge-sm ml-1 opacity-40 cursor-help">{{ formatBias(result.bias) }}</span>
             </td>
-            <td class="text-right" v-html="formatCompany(result.company)"></td>
+            <td class="text-right">{{ result.company }}</td>
           </tr>
         </tbody>
       </table>
