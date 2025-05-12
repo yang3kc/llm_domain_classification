@@ -1,0 +1,1 @@
+uv run extract_ratings.py ../../../data/intermediate/raw_responses/openai/o3-mini-2025-01-31_raw ../../../data/intermediate/raw_responses/openai/o3-mini-2025-01-31_extracted
