@@ -5,6 +5,14 @@ uv run gen_stats.py ../../../data/intermediate/parsed_responses/openai/gpt-4.1-m
 
 uv run gen_stats.py ../../../data/intermediate/parsed_responses/openai/gpt-4.1-2025-04-14.parquet gpt-4.1-2025-04-14 OpenAI non_reasoning
 
+uv run gen_stats.py ../../../data/intermediate/parsed_responses/openai/o4-mini-2025-04-16.parquet o4-mini-2025-04-16 OpenAI reasoning
+
+uv run gen_stats.py ../../../data/intermediate/parsed_responses/openai/o3-mini-2025-01-31.parquet o3-mini-2025-01-31 OpenAI reasoning
+
+uv run gen_stats.py ../../../data/intermediate/parsed_responses/openai/o3-2025-04-16.parquet o3-2025-04-16 OpenAI reasoning
+
+uv run gen_stats.py ../../../data/intermediate/parsed_responses/openai/o1-2024-12-17.parquet o1-2024-12-17 OpenAI reasoning
+
 # Anthropic
 uv run gen_stats.py ../../../data/intermediate/parsed_responses/anthropic/claude-3-5-haiku-20241022.parquet claude-3-5-haiku-20241022 Anthropic non_reasoning
 
