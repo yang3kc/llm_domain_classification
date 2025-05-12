@@ -2,7 +2,11 @@
 
 This folder contains the frontend code for the project.
 
-A GitHub workflow has been set up so that every time changes are made on the main branch, the frontend will be automatically compiled and deployed.
+
+## Specifications
+
+- Vue 3 + Vite web application
+- Styling: Tailwind CSS + DaisyUI
 
 ## Local project setup
 
@@ -21,3 +25,5 @@ npm run dev
 ```sh
 npm run build
 ```
+
+Note that a GitHub workflow has been set up so that every time changes are made on the main branch, the frontend will be automatically compiled and deployed.

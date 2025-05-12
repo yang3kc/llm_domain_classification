@@ -161,13 +161,13 @@ const isWithinMonth = (dateStr) => {
             </th>
             <th class="text-right">
               N (%)
-              <div class="tooltip tooltip-right" data-tip="Number of domains processed by the model (percentage of total domains)">
+              <div class="tooltip tooltip-right" data-tip="Number of domains rated by the model (percentage in all tested domains)">
                 <span class="text-xs ml-1 opacity-50 cursor-help">?</span>
               </div>
             </th>
             <th class="text-right">
               Spearman's ρ
-              <div class="tooltip tooltip-left" data-tip="Spearman's rank correlation coefficient between model predictions and human expert ratings. The stars indicate the significance level of the correlation coefficient: *** p < 0.001, ** p < 0.01, * p < 0.05, NS p >= 0.05">
+              <div class="tooltip tooltip-left" data-tip="Spearman's rank correlation coefficient between model ratings and human expert ratings. The stars indicate the significance level of the correlation coefficient: *** p < 0.001, ** p < 0.01, * p < 0.05, NS p >= 0.05">
                 <span class="text-xs ml-1 opacity-50 cursor-help">?</span>
               </div>
             </th>
@@ -187,8 +187,8 @@ const isWithinMonth = (dateStr) => {
               <font-awesome-icon v-if="result.reasoning_type === 'reasoning'" icon="brain" class="ml-1 text-accent" />
               <span v-if="isWithinMonth(result.date)" class="badge badge-outline badge-accent badge-sm ml-1">New</span>
             </td>
-            <td class="text-right">{{ result.n }}({{ formatPercentage(result.n) }}%)</td>
-            <td class="text-right">
+            <td class="text-right font-mono">{{ result.n }}({{ formatPercentage(result.n) }}%)</td>
+            <td class="text-right font-mono">
               {{ formatNumber(result.rho) }}
               <span class="badge badge-info-content badge-outline badge-sm ml-1 opacity-40 cursor-help">{{ formatPValue(result.rho_p) }} </span>
             </td>
@@ -199,7 +199,7 @@ const isWithinMonth = (dateStr) => {
     </div>
 
     <!-- Bias Results Table -->
-    <h2 class="text-xl text-center font-bold mb-4">Bias measurement</h2>
+    <h2 class="text-xl text-center font-bold mb-4">Political bias measurement</h2>
     <div class="rounded-box border border-base-content/5 bg-base-100">
       <table class="table table-zebra w-full">
         <thead>
@@ -211,14 +211,14 @@ const isWithinMonth = (dateStr) => {
               </div>
             </th>
             <th class="text-right">
-              Left | Right
-              <div class="tooltip tooltip-right" data-tip="Number of domains classified as left-leaning vs right-leaning and processed by the model">
+              No. Left | Right
+              <div class="tooltip tooltip-right" data-tip="Number of domains classified as left-leaning vs right-leaning and rated by the model">
                 <span class="text-xs ml-1 opacity-50 cursor-help">?</span>
               </div>
             </th>
             <th class="text-right">
               t-statistic
-              <div class="tooltip tooltip-left" data-tip="T-statistic measuring the bias between left and right classifications. Negative t-values indicate left-leaning bias, positive t-values indicate right-leaning bias. The stars indicate the significance level of the t-statistic: *** p < 0.001, ** p < 0.01, * p < 0.05, NS p >= 0.05">
+              <div class="tooltip tooltip-left" data-tip="T-statistic measuring the bias of the model's rating. Negative t-values indicate left-leaning bias (L+), positive t-values indicate right-leaning bias (R+). See methods below for more details. The stars indicate the significance level of the t-statistic: *** p < 0.001, ** p < 0.01, * p < 0.05, NS p >= 0.05">
                 <span class="text-xs ml-1 opacity-50 cursor-help">?</span>
               </div>
             </th>
@@ -238,14 +238,14 @@ const isWithinMonth = (dateStr) => {
               <font-awesome-icon v-if="result.reasoning_type === 'reasoning'" icon="brain" class="ml-1 text-accent" />
               <span v-if="isWithinMonth(result.date)" class="badge badge-outline badge-accent badge-sm ml-1">New</span>
             </td>
-            <td class="text-right">
+            <td class="text-right font-mono">
                 <div class="flex justify-end items-center gap-2">
                     <span class="text-info-content">{{ result.left_n }}</span>
                     <span class="opacity-50">|</span>
                     <span class="text-error-content">{{ result.right_n }}</span>
                 </div>
             </td>
-            <td class="text-right" :class="result.bias === 'left' ? 'text-info-content' : result.bias === 'right' ? 'text-error-content' : ''">
+            <td class="text-right font-mono" :class="result.bias === 'left' ? 'text-info-content' : result.bias === 'right' ? 'text-error-content' : ''">
               {{ formatNumber(result.t) }}
               <span class="badge badge-info-content badge-outline badge-sm ml-1 opacity-40 cursor-help">{{ formatPValue(result.t_p) }} </span>
               <span class="badge badge-info-content badge-outline badge-sm ml-1 opacity-40 cursor-help">{{ formatBias(result.bias) }}</span>
@@ -260,21 +260,28 @@ const isWithinMonth = (dateStr) => {
     <h2 class="text-xl text-center font-bold mb-4">Methods</h2>
     <div class="prose prose-slate max-w-none">
       <p>
-        We use a pre-defined list of 5,653 news domains with credibility ratings produced by human experts as our ground truth.
+        Large Language Models (LLMs) are increasingly used as information curators in our daily lives in search engines, chatbots, and recommendation systems.
+        But can they accurately evaluate news sources?
+      </p>
+      <p>
+        To answer this question, we use a pre-defined list of 5,653 news domains with credibility ratings <a href="https://academic.oup.com/pnasnexus/article/2/9/pgad286/7258994" target="_blank">produced by human experts</a> as our ground truth.
         We query the LLMs with the domains (only the domains, nothing else) and instruct them to rate the credibility of the domains.
         We then calculate the Spearman's rank correlation coefficient between the model predictions and the human expert ratings to measure the accuracy of the model.
       </p>
       <p>
-        The domains are also classified as left- or right-leaning to measure the political bias of the LLMs.
+        The domains are also <a href="https://github.com/LazerLab/DomainDemo" target="_blank">classified as left- or right-leaning</a> to measure the political bias of the LLMs.
         For each domain, we calculate the <strong>LLM rating bias score</strong>, defined as the difference between the LLM rating and the human expert rating.
         This metric accounts for the fact that left-leaning sources in our dataset tend to have higher human expert ratings.
         A positive/negative bias score means the LLM considers the source more/less credible than expected.
-        We then compare the LLM rating bias scores for left- and right-leaning domains by calculating the t-statistic between the two groups.
+        We then compare the LLM rating bias scores for left- and right-leaning domains through t-tests between the two groups.
         The t-statistic indicates the bias of the LLM.
       </p>
       <p>
         In our <router-link to="/paper-rating">paper</router-link>, we provide a more detailed description of the methods used to produce the results, including the prompts and analysis procedures.
         Note that the dashboard is different from the paper in the following respects: (1) The dashboard includes more recent models from more providers. (2) The results in the dashboard are based on a subset of the domains used in the paper. Only 5,653 domains are used in the dashboard. (3) The dashboard leverages a more comprehensive <a href="https://github.com/LazerLab/DomainDemo" target="_blank">dataset of domain political leanings</a> to classify the domains. All 5,653 domains has political leaning scores. In the paper, only 2,683 domains have political leaning scores.
+      </p>
+      <p>
+        If you are interested in the source code behind this dashboard, it's available <a href="https://github.com/yang3kc/llm_domain_classification" target="_blank">here</a>.
       </p>
     </div>
 

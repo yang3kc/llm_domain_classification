@@ -1,13 +1,31 @@
-# LLM Domain Classification
+# LLM Domain Classification project
 
-A project to systematically probe multiple large language model (LLM) APIs with standardized prompts and analyze their responses.
+![logo](logo.png)
 
-## Objectives
+## Overview
 
-- Systematically probe multiple LLM APIs (OpenAI, Anthropic, Google Gemini, TogetherAI) with standardized prompts
-- Log and store responses in a structured, reproducible format for subsequent analysis
-- Publish interactive results through a lightweight Vue 3 + Vite web application
-- Keep backend (Python) and frontend (web) code cleanly separated
+As LLMs increasingly help curate and filter information in search engines, chatbots, and recommendation systems, their ability to accurately evaluate news sources directly impacts the quality and reliability of information they provide to users.
+This project evaluates how well Large Language Models (LLMs) can assess the credibility and categorize news sources.
+
+See our [dashboard](https://yang3kc.github.io/llm_domain_classification/) for the results and methods.
+
+## Citation
+
+If you find this project useful, please cite it as follows:
+
+```bibtex
+@misc{yang2024accuracypoliticalbiasnews,
+      title={Accuracy and Political Bias of News Source Credibility Ratings by Large Language Models},
+      author={Kai-Cheng Yang and Filippo Menczer},
+      year={2024},
+      eprint={2304.00228},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2304.00228},
+}
+```
+
+# Technical Details
 
 ## Project Structure
 
@@ -16,78 +34,27 @@ project_root/
 ├── README.md
 ├── LICENSE
 ├── .gitignore
-├── .env.sample                 # API keys (NOT committed)
-├── data/                       # Raw + processed model outputs
+├── .env                          # API keys (NOT committed)
+├── data/                         # Raw + processed model outputs
 │   ├── source/                   # Source files
 │   ├── intermediate/             # Intermediate files
 │   └── processed/                # Analyzed and formatted data
-├── backend/                    # Python component
-│   └── workflow/                 # The workflows
-├── frontend/                   # Vue 3 + Vite app
+├── backend/                      # Backend code
+├── frontend/                     # Vue 3 + Vite app for the dashboard
 └── .github/
     └── workflows/
-        └── deploy-pages.yml    # build + push gh pages
+        └── deploy-pages.yml      # build + push gh pages
 ```
 
-## Setup
+## Backend
 
-### Backend
+See [backend](backend) for details.
 
-1. Set up Python environment using `uv`:
-   ```bash
-   cd backend
-   uv sync
-   ```
+## Frontend
 
+See [frontend](frontend) for details.
 
-### Frontend
+## Contributing
 
-1. Install dependencies:
-   ```bash
-   cd frontend
-   npm install
-   ```
-
-2. Start development server:
-   ```bash
-   npm run dev
-   ```
-
-## Development
-
-### Backend Specifications
-- Python environment managed with `uv`
-- Local execution of Python tasks (no cloud/CI processing)
-- Data storage formats:
-  - Raw responses: JSON
-  - Processed data: JSON and CSV
-
-### Frontend Specifications
-- Vue 3 + Vite web application
-- Node.js version: 18+ LTS
-- Styling: Tailwind CSS + DaisyUI
-- Features:
-  - Interactive visualization of backend results
-  - Sub-pages for different research paper results
-  - Responsive design for mobile and desktop
-
-## Data Management
-
-Each LLM response includes:
-- Timestamp
-- Model identifier
-- Prompt used
-- Complete response
-- Metadata (temperature, tokens, etc.)
-
-Processed results include aggregated statistics and analysis.
-
-## Deployment
-
-- Frontend: Automatic deployment to GitHub Pages via GitHub Actions
-- Backend: Local processing with results committed to data directory
-- Environment: Managed via `.env` files (not committed to repository)
-
-## License
-
-See [LICENSE](LICENSE) file for details.
+You are welcome to contribute to the project by opening an issue or a pull request.
+Questions and requests can be sent to [Kai-Cheng Yang](mailto:yang3kc@gmail.com).

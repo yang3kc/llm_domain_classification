@@ -2,6 +2,15 @@
 
 This directory contains the backend code for the dashboard.
 
+## Structure
+
+```
+backend/
+├── llmdomainrating/          # Local python package to fetch and process data
+├── notebook/                 # Temporary notebooks for development
+└── scripts/                  # Python scripts
+```
+
 ## Setup
 
 1. Set up Python environment using `uv`:
