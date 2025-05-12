@@ -43,7 +43,7 @@ project_root/
 ├── frontend/                     # Vue 3 + Vite app for the dashboard
 └── .github/
     └── workflows/
-        └── deploy-pages.yml     # build + push gh pages
+        └── deploy-pages.yml      # build + push gh pages
 ```
 
 ## Backend
