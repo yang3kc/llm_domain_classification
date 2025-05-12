@@ -22,17 +22,19 @@ const { companyLogos } = useCompanyLogos()
 
       <article class="prose prose-slate max-w-none">
         <p>
-          This project aims to evaluate <strong>LLMs' ability to recognize and classify news sources into different categories</strong>.
-          LLMs are increasingly used as information curators in our daily lives, thus their knowledge of news sources is crucial to the quality of the information they provide us.
+          This project evaluates how well <strong>Large Language Models (LLMs) can assess the credibility and categorize news sources</strong>.
+          As LLMs increasingly help curate and filter information in search engines, chatbots, and recommendation systems, their ability to accurately evaluate news sources directly impacts the quality and reliability of information they provide to users.
         </p>
         <p>
-          To answer this question, we use a pre-defined list of news domains with <strong>credibility ratings</strong> produced by human experts as our ground truth.
+          To this end, we use a pre-defined list of news domains with <strong>credibility ratings</strong> produced by human experts as our ground truth.
           We further test LLMs from different providers on this task and evaluate their performance.
           We also measure the <strong>political bias</strong> of LLMs on this task by comparing the ratings of the the models on the left-leaning and right-leaning domains in the U.S. context.
+          We will keep adding results for more models when they become available.
         </p>
         <p>
-          See <router-link to="/" class="link link-neutral">Dashboard</router-link> page for the results.
-          See <router-link to="/paper-rating" class="link link-neutral">paper</router-link> page for more details.
+          See <router-link to="/" class="link link-neutral">Dashboard</router-link> page for the results and methods.
+          See <router-link to="/paper-rating" class="link link-neutral">Paper</router-link> page for more details.
+          Questions and requests can be sent to <a href="mailto:yang3kc@gmail.com" class="link link-neutral">Kai-Cheng Yang</a>.
         </p>
       </article>
 
