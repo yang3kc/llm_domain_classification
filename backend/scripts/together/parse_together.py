@@ -21,9 +21,11 @@ for file_name in os.listdir(resp_path):
                 resp_text = resp_json["choices"][0]["message"]["content"]
 
                 if "<think>" in resp_text:
-                    resp_text = repair_json(
-                        re.sub(r"<think>.*?</think>\s*", "", resp_text, flags=re.DOTALL)
+                    resp_text = re.sub(
+                        r"<think>.*?</think>\s*", "", resp_text, flags=re.DOTALL
                     )
+
+                resp_text = repair_json(resp_text)
 
                 rating_obj = DomainRating.model_validate_json(resp_text)
                 rating_dict = rating_obj.model_dump()
