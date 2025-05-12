@@ -1,13 +1,29 @@
-# LLM Domain Classification
+# LLM Domain Classification project
 
-A project to systematically probe multiple large language model (LLM) APIs with standardized prompts and analyze their responses.
+![logo](logo.png)
 
-## Objectives
+## Overview
 
-- Systematically probe multiple LLM APIs (OpenAI, Anthropic, Google Gemini, TogetherAI) with standardized prompts
-- Log and store responses in a structured, reproducible format for subsequent analysis
-- Publish interactive results through a lightweight Vue 3 + Vite web application
-- Keep backend (Python) and frontend (web) code cleanly separated
+As LLMs increasingly help curate and filter information in search engines, chatbots, and recommendation systems, their ability to accurately evaluate news sources directly impacts the quality and reliability of information they provide to users.
+This project evaluates how well Large Language Models (LLMs) can assess the credibility and categorize news sources.
+
+See our [dashboard](https://yang3kc.github.io/llm_domain_classification/) for the results and methods.
+
+## Citation
+
+If you find this project useful, please cite it as follows:
+
+```bibtex
+@misc{yang2024accuracypoliticalbiasnews,
+      title={Accuracy and Political Bias of News Source Credibility Ratings by Large Language Models},
+      author={Kai-Cheng Yang and Filippo Menczer},
+      year={2024},
+      eprint={2304.00228},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2304.00228},
+}
+```
 
 ## Project Structure
 
