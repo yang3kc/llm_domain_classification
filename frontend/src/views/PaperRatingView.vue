@@ -40,7 +40,7 @@ const copyToClipboard = async () => {
          <a href="https://www.kaichengyang.me" class="link link-neutral" target="_blank">Kai-Cheng Yang</a> and <a href="https://cnets.indiana.edu/fil" class="link link-neutral" target="_blank">Filippo Menczer</a>
       </div>
       <!-- links -->
-      <div class="flex justify-center gap-4 my-8">
+      <div class="flex justify-center gap-4 my-4">
         <div class="btn btn-neutral btn-outline">
           <a href="https://arxiv.org/abs/2304.00228" class="text-neutral" target="_blank">
             <font-awesome-icon :icon="['fas', 'file-pdf']" class="mr-2" /> arXiv
