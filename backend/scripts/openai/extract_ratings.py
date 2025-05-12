@@ -14,6 +14,21 @@ class DomainRatingExtracted(BaseModel):
     explanation: str = Field(description="Explanation of the rating.")
 
 
+def load_file_query(raw_data_dir, output_dir):
+    files_in_raw_data_dir = [
+        file for file in os.listdir(raw_data_dir) if file.endswith(".txt")
+    ]
+    files_in_output_dir = [
+        file for file in os.listdir(output_dir) if file.endswith(".txt")
+    ]
+    files_in_output_dir = set(files_in_output_dir)
+    files_to_query = [
+        file for file in files_in_raw_data_dir if file not in files_in_output_dir
+    ]
+    print(f"Already processed {len(files_in_output_dir)} files")
+    return files_to_query
+
+
 def load_old_resp_text(file_path):
     with open(file_path, "r") as f:
         resp = json.load(f)
@@ -53,7 +68,8 @@ if __name__ == "__main__":
 
     client = OpenAI()
 
-    for file in tqdm(os.listdir(raw_data_dir)):
+    files_to_query = load_file_query(raw_data_dir, output_dir)
+    for file in tqdm(files_to_query):
         resp_text_old = load_old_resp_text(os.path.join(raw_data_dir, file))
         if resp_text_old is None:
             print(f"No old response found for {file}")
