@@ -36,6 +36,16 @@ const { companyLogos } = useCompanyLogos()
         </p>
       </article>
 
+      <div class="divider divider-neutral my-8"></div>
+
+      <article class="prose prose-slate max-w-none">
+        <div class="prose-h1 prose-2xl prose-slate font-bold mt-5 text-center">About this website</div>
+        <p>
+          This website uses <a href="https://vuejs.org/" class="link link-neutral" target="_blank">Vue.js</a> <a href="https://tailwindcss.com/" class="link link-neutral" target="_blank">Tailwind CSS</a>, <a href="https://daisyui.com/" class="link link-neutral" target="_blank">DaisyUI</a> and <a href="https://fontawesome.com/" class="link link-neutral" target="_blank">FontAwesome</a>.
+          The source code was "vibe-coded" with <a href="https://www.cursor.com/" class="link link-neutral" target="_blank">Cursor</a>.
+        </p>
+      </article>
+
     </div>
     <Footer />
   </div>
