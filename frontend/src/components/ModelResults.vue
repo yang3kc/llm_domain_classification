@@ -187,8 +187,8 @@ const isWithinMonth = (dateStr) => {
               <font-awesome-icon v-if="result.reasoning_type === 'reasoning'" icon="brain" class="ml-1 text-accent" />
               <span v-if="isWithinMonth(result.date)" class="badge badge-outline badge-accent badge-sm ml-1">New</span>
             </td>
-            <td class="text-right">{{ result.n }}({{ formatPercentage(result.n) }}%)</td>
-            <td class="text-right">
+            <td class="text-right font-mono">{{ result.n }}({{ formatPercentage(result.n) }}%)</td>
+            <td class="text-right font-mono">
               {{ formatNumber(result.rho) }}
               <span class="badge badge-info-content badge-outline badge-sm ml-1 opacity-40 cursor-help">{{ formatPValue(result.rho_p) }} </span>
             </td>
@@ -238,14 +238,14 @@ const isWithinMonth = (dateStr) => {
               <font-awesome-icon v-if="result.reasoning_type === 'reasoning'" icon="brain" class="ml-1 text-accent" />
               <span v-if="isWithinMonth(result.date)" class="badge badge-outline badge-accent badge-sm ml-1">New</span>
             </td>
-            <td class="text-right">
+            <td class="text-right font-mono">
                 <div class="flex justify-end items-center gap-2">
                     <span class="text-info-content">{{ result.left_n }}</span>
                     <span class="opacity-50">|</span>
                     <span class="text-error-content">{{ result.right_n }}</span>
                 </div>
             </td>
-            <td class="text-right" :class="result.bias === 'left' ? 'text-info-content' : result.bias === 'right' ? 'text-error-content' : ''">
+            <td class="text-right font-mono" :class="result.bias === 'left' ? 'text-info-content' : result.bias === 'right' ? 'text-error-content' : ''">
               {{ formatNumber(result.t) }}
               <span class="badge badge-info-content badge-outline badge-sm ml-1 opacity-40 cursor-help">{{ formatPValue(result.t_p) }} </span>
               <span class="badge badge-info-content badge-outline badge-sm ml-1 opacity-40 cursor-help">{{ formatBias(result.bias) }}</span>
