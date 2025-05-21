@@ -14,14 +14,18 @@ See our [dashboard](https://yang3kc.github.io/llm_domain_classification/) for th
 If you find this project useful, please cite it as follows:
 
 ```bibtex
-@misc{yang2024accuracypoliticalbiasnews,
-      title={Accuracy and Political Bias of News Source Credibility Ratings by Large Language Models},
-      author={Kai-Cheng Yang and Filippo Menczer},
-      year={2024},
-      eprint={2304.00228},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL},
-      url={https://arxiv.org/abs/2304.00228},
+@inproceedings{yang2025accuracy,
+    author = {Yang, Kai-Cheng and Menczer, Filippo},
+    title = {Accuracy and Political Bias of News Source Credibility Ratings by Large Language Models},
+    year = {2025},
+    publisher = {Association for Computing Machinery},
+    address = {New York, NY, USA},
+    url = {https://doi.org/10.1145/3717867.3717903},
+    doi = {10.1145/3717867.3717903},
+    booktitle = {Proceedings of the 17th ACM Web Science Conference 2025},
+    pages = {127–137},
+    numpages = {11},
+    series = {Websci '25}
 }
 ```
 
