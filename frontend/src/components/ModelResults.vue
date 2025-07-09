@@ -110,7 +110,7 @@ const isWithinMonth = (dateStr) => {
 </script>
 
 <template>
-  <div class="space-y-8">
+  <div class="space-y-8 mb-8">
     <!-- Correlation Results Table -->
     <h1 class="text-3xl text-center font-bold my-6">Accuracy and political bias of news source credibility ratings by large language models</h1>
 
