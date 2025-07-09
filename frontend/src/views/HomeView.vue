@@ -5,9 +5,9 @@ import NavBar from '@/components/NavBar.vue'
 </script>
 
 <template>
-  <div>
+  <div class="flex flex-col min-h-screen">
     <NavBar />
-    <div class="container mx-auto">
+    <div class="container mx-auto flex-grow">
       <ModelResults />
     </div>
     <Footer />

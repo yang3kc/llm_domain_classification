@@ -7,9 +7,9 @@ const { companyLogos } = useCompanyLogos()
 </script>
 
 <template>
-  <div>
+  <div class="flex flex-col min-h-screen">
     <NavBar />
-    <div class="container mx-auto">
+    <div class="container mx-auto flex-grow">
       <div class="flex items-center gap-8 mb-8 justify-center">
         <div class="flex-shrink-0">
           <img :src="companyLogos.logo" alt="Logo" class="h-25 inline-block mt-5" />

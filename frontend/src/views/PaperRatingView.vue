@@ -33,9 +33,9 @@ const copyToClipboard = async () => {
 </script>
 
 <template>
-  <div>
+  <div class="flex flex-col min-h-screen">
     <NavBar />
-    <div class="container mx-auto">
+    <div class="container mx-auto flex-grow">
       <!-- title  -->
       <div class="prose-h1 prose-2xl prose-slate text-center font-bold mt-6">Accuracy and political bias of news source credibility ratings by large language models</div>
       <!-- authors -->
