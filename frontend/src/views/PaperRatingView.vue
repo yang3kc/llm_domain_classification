@@ -45,17 +45,17 @@ const copyToClipboard = async () => {
       <!-- links -->
       <div class="text-center my-8">
         <div class="inline-flex flex-wrap gap-4 justify-center">
-          <a href="https://doi.org/10.1145/3717867.3717903" class="btn btn-outline border-neutral text-neutral hover:bg-neutral hover:text-white" target="_blank">
+          <a href="https://doi.org/10.1145/3717867.3717903" class="btn btn-outline border-neutral text-neutral hover:bg-neutral hover:text-white text-lg" target="_blank">
             <font-awesome-icon :icon="['fas', 'file-pdf']" class="mr-2" /> DOI
           </a>
-          <a href="https://arxiv.org/abs/2304.00228" class="btn btn-outline border-neutral text-neutral hover:bg-neutral hover:text-white" target="_blank">
+          <a href="https://arxiv.org/abs/2304.00228" class="btn btn-outline border-neutral text-neutral hover:bg-neutral hover:text-white text-lg" target="_blank">
             <font-awesome-icon :icon="['fas', 'file-pdf']" class="mr-2" /> arXiv
           </a>
-          <a href="https://github.com/osome-iu/llm_domain_rating" class="btn btn-outline border-neutral text-neutral hover:bg-neutral hover:text-white" target="_blank">
+          <a href="https://github.com/osome-iu/llm_domain_rating" class="btn btn-outline border-neutral text-neutral hover:bg-neutral hover:text-white text-lg" target="_blank">
             <font-awesome-icon :icon="['fab', 'github']" class="mr-2" /> GitHub
           </a>
-          <a href="https://x.com/yang3kc/status/1823404980126261262" class="btn btn-outline border-neutral text-neutral hover:bg-neutral hover:text-white" target="_blank">
-            <font-awesome-icon :icon="['fab', 'x-twitter']" class="mr-2" /> Twitter thread
+          <a href="https://x.com/yang3kc/status/1823404980126261262" class="btn btn-outline border-neutral text-neutral hover:bg-neutral hover:text-white text-lg" target="_blank">
+            <font-awesome-icon :icon="['fab', 'x-twitter']" class="mr-2" /> Twitter
           </a>
         </div>
       </div>
